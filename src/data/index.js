@@ -5,6 +5,7 @@ import { TRENDING, GAPS, PALATES } from './trends.js'
 import { PITCH, FLAVOR_IDEAS, BRAND_FACTS } from './pitch.js'
 import { CAMPAIGN_STATS, WHAT_THEY_WANT, CAMPAIGN_TIMELINE, APPLY, APPLICANT_GROWTH } from './campaign.js'
 import { APPLICANTS } from './applicants.js'
+import { BUY_LINKS } from './buy.js'
 
 /**
  * Every cited object on the site, flattened. Used by the footer count and by
@@ -38,6 +39,7 @@ export function allCitations() {
   APPLICANTS.forEach((a) =>
     push(`applicants.${a.id}`, { label: `${a.creator} application video`, url: a.url }),
   )
+  BUY_LINKS.forEach((b) => b.source && push(`buy.${b.id}`, b.source))
   return out
 }
 

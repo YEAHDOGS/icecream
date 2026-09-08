@@ -8,6 +8,7 @@
   import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
   import logo from "./assets/logo.svg";
   import { SOURCE_COUNT } from "./data/index.js";
+  import { BUILD_TAG } from "./data/imagery.js";
 
   const TABS = [
     { id: "market", label: "Market", component: MarketPanel },
@@ -54,6 +55,7 @@
 
 <div
   class="app h-dvh w-full grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] max-w-[1920px] mx-auto px-3 sm:px-4 md:px-6 xl:px-8 2xl:px-12"
+  data-build={BUILD_TAG}
 >
   <header
     class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 py-2 md:py-3 xl:py-4 border-b border-line min-w-0"

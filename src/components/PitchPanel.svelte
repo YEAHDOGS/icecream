@@ -1,6 +1,8 @@
 <script>
   import Cite from "./Cite.svelte";
   import Stat from "./Stat.svelte";
+  import HeroImage from "./HeroImage.svelte";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import { PITCH, FLAVOR_IDEAS, BRAND_FACTS } from "../data/pitch.js";
 </script>
 
@@ -9,14 +11,15 @@
 >
   <!-- Opening -->
   <div
-    class="card p-4 xl:p-6 flex flex-col gap-3 min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 md:overflow-y-auto md:overflow-x-hidden"
+    class="card p-4 xl:p-6 flex flex-col gap-3 md:min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 md:overflow-y-auto md:overflow-x-hidden"
   >
     <p class="eyebrow m-0">{PITCH.eyebrow}</p>
     <h2
-      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-semibold leading-tight tracking-tight"
+      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight tracking-tight text-balance"
     >
       {PITCH.headline}
     </h2>
+    <HeroImage image={TAB_IMAGES.pitch} />
     <p class="m-0 text-sm xl:text-base leading-relaxed text-ink-2">{PITCH.lede}</p>
     <ul class="m-0 p-0 list-none flex flex-col gap-2 mt-1">
       {#each PITCH.points as p (p.id)}
@@ -34,7 +37,7 @@
 
   <!-- Flavor lineup -->
   <div
-    class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 sm:col-span-2 md:col-span-2 xl:col-span-5 xl:overflow-hidden"
+    class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 sm:col-span-2 md:col-span-2 xl:col-span-5 xl:overflow-hidden"
   >
     <div>
       <p class="eyebrow m-0">Proposed first lineup</p>
@@ -43,7 +46,7 @@
       </p>
     </div>
     <div
-      class="grid gap-2 grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
+      class="grid gap-2 grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       {#each FLAVOR_IDEAS as f (f.id)}
         <article class="idea">
@@ -63,7 +66,7 @@
 
   <!-- The brand we're joining -->
   <div
-    class="flex flex-col gap-2 md:gap-3 min-h-0 sm:col-span-2 md:col-span-1 xl:col-span-3 md:overflow-y-auto md:overflow-x-hidden overscroll-contain"
+    class="flex flex-col gap-2 md:gap-3 md:min-h-0 sm:col-span-2 md:col-span-1 xl:col-span-3 md:overflow-y-auto md:overflow-x-hidden overscroll-contain"
   >
     <p class="eyebrow m-0 px-1">{BRAND_FACTS.title}</p>
     {#each BRAND_FACTS.stats as s (s.id)}

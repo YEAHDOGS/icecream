@@ -2,6 +2,8 @@
   import BarChart from "./BarChart.svelte";
   import Cite from "./Cite.svelte";
   import Stat from "./Stat.svelte";
+  import HeroImage from "./HeroImage.svelte";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import {
     GIANTS,
     CHALLENGERS,
@@ -29,8 +31,9 @@
         Ice cream revenue, latest reported year
       </p>
     </div>
+    <HeroImage image={TAB_IMAGES.players} />
     <BarChart rows={giantRows} />
-    <ul class="m-0 p-0 list-none flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
+    <ul class="m-0 p-0 list-none flex flex-col gap-2 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
       {#each GIANTS as g (g.name)}
         <li class="text-[0.72rem] leading-snug">
           <span class="font-semibold text-ink">{g.name}</span>
@@ -53,7 +56,7 @@
       </p>
     </div>
     <div
-      class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain"
+      class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain"
     >
       {#each CHALLENGERS as c (c.id)}
         <Stat stat={c} />
@@ -67,7 +70,7 @@
   >
     <div class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 md:flex-1 xl:overflow-hidden">
       <p class="eyebrow m-0">{ARC.title}</p>
-      <ol class="m-0 p-0 list-none flex flex-col gap-1.5 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
+      <ol class="m-0 p-0 list-none flex flex-col gap-1.5 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
         {#each ARC.steps as s (s.year)}
           <li class="grid grid-cols-[3rem_1fr] gap-2 text-[0.72rem] leading-snug">
             <span class="font-semibold text-accent-bright tabular-nums">{s.year}</span>
