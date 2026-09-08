@@ -5,11 +5,11 @@
 </script>
 
 <section
-  class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-12 scroll-y md:overflow-hidden"
+  class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-12 scroll-y md:overflow-hidden md:grid-rows-[auto_minmax(0,1fr)]"
 >
   <!-- Opening -->
   <div
-    class="card p-4 xl:p-6 flex flex-col gap-3 min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 xl:overflow-y-auto xl:overflow-x-hidden"
+    class="card p-4 xl:p-6 flex flex-col gap-3 min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 md:overflow-y-auto md:overflow-x-hidden"
   >
     <p class="eyebrow m-0">{PITCH.eyebrow}</p>
     <h2
@@ -43,7 +43,7 @@
       </p>
     </div>
     <div
-      class="grid gap-2 grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 min-h-0 overflow-y-auto overflow-x-hidden pr-0.5"
+      class="grid gap-2 grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       {#each FLAVOR_IDEAS as f (f.id)}
         <article class="idea">
@@ -63,7 +63,7 @@
 
   <!-- The brand we're joining -->
   <div
-    class="flex flex-col gap-2 md:gap-3 min-h-0 sm:col-span-2 md:col-span-1 xl:col-span-3 xl:overflow-y-auto xl:overflow-x-hidden"
+    class="flex flex-col gap-2 md:gap-3 min-h-0 sm:col-span-2 md:col-span-1 xl:col-span-3 md:overflow-y-auto md:overflow-x-hidden overscroll-contain"
   >
     <p class="eyebrow m-0 px-1">{BRAND_FACTS.title}</p>
     {#each BRAND_FACTS.stats as s (s.id)}

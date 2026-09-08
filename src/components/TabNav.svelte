@@ -14,9 +14,18 @@
     if (e.key === "ArrowLeft")
       onSelect(tabs[(idx - 1 + tabs.length) % tabs.length].id);
   }
+
+  // The strip scrolls horizontally on small screens; keep the active tab in view.
+  let bar = $state(null);
+  $effect(() => {
+    active;
+    bar
+      ?.querySelector('[aria-selected="true"]')
+      ?.scrollIntoView({ inline: "center", block: "nearest" });
+  });
 </script>
 
-<div class="tabs" role="tablist" aria-label="Sections" onkeydown={onKey}>
+<div class="tabs" role="tablist" aria-label="Sections" onkeydown={onKey} bind:this={bar}>
   {#each tabs as t (t.id)}
     <button
       type="button"
@@ -27,8 +36,8 @@
       tabindex={t.id === active ? 0 : -1}
       onclick={() => onSelect(t.id)}
     >
-      <span class="hidden sm:inline">{t.label}</span>
-      <span class="sm:hidden">{t.short ?? t.label}</span>
+      <span class="hidden lg:inline">{t.label}</span>
+      <span class="lg:hidden">{t.short ?? t.label}</span>
     </button>
   {/each}
 </div>
@@ -42,7 +51,12 @@
     border: 1px solid var(--border);
     border-radius: 999px;
     max-width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   @media (min-width: 640px) {
@@ -52,7 +66,7 @@
   }
 
   .tab {
-    flex: 1 1 0;
+    flex: 1 0 auto;
     min-width: 0;
     padding: 0.45rem 0.5rem;
     border: 0;
@@ -82,6 +96,14 @@
     &:focus-visible {
       outline: 1px solid var(--accent);
       outline-offset: -1px;
+    }
+  }
+
+  // Six tabs don't fit narrow strips: keep natural width and scroll.
+  // (Placed after .tab so it wins the cascade at equal specificity.)
+  @media (max-width: 1023px) {
+    .tab {
+      flex: 0 0 auto;
     }
   }
 </style>

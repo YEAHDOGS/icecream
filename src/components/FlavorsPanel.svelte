@@ -7,7 +7,7 @@
 </script>
 
 <section
-  class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-12 scroll-y md:overflow-hidden"
+  class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-12 scroll-y md:overflow-hidden md:grid-rows-[minmax(0,1fr)_auto]"
 >
   <!-- Trending now -->
   <div
@@ -20,7 +20,7 @@
       </p>
     </div>
     <div
-      class="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-h-0 overflow-y-auto overflow-x-hidden pr-0.5"
+      class="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       {#each TRENDING as t (t.id)}
         <article class="trend">
@@ -51,7 +51,7 @@
       {/each}
     </div>
     {#if current}
-      <ul class="m-0 p-0 list-none flex flex-col gap-1 min-h-0 overflow-y-auto overflow-x-hidden">
+      <ul class="m-0 p-0 list-none flex flex-col gap-1 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
         {#each current.flavors as f}
           <li class="flavor">{f}</li>
         {/each}
@@ -68,7 +68,7 @@
     class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 sm:col-span-1 md:col-span-3 xl:col-span-2 xl:overflow-hidden"
   >
     <p class="eyebrow m-0">Open lanes</p>
-    <ul class="m-0 p-0 list-none flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden md:grid md:grid-cols-3 xl:flex">
+    <ul class="m-0 p-0 list-none flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain md:grid md:grid-cols-3 xl:flex">
       {#each GAPS as g (g.id)}
         <li class="text-[0.72rem] leading-snug">
           <span class="font-semibold text-ink">{g.name}.</span>

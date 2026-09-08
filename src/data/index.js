@@ -3,6 +3,8 @@ import { COUNTRIES } from './countries.js'
 import { GIANTS, CHALLENGERS, CELEBRITY_COMPS, ARC } from './competitors.js'
 import { TRENDING, GAPS, PALATES } from './trends.js'
 import { PITCH, FLAVOR_IDEAS, BRAND_FACTS } from './pitch.js'
+import { CAMPAIGN_STATS, WHAT_THEY_WANT, CAMPAIGN_TIMELINE, APPLY, APPLICANT_GROWTH } from './campaign.js'
+import { APPLICANTS } from './applicants.js'
 
 /**
  * Every cited object on the site, flattened. Used by the footer count and by
@@ -28,6 +30,14 @@ export function allCitations() {
   PITCH.points.forEach((p) => p.source && push(`pitch.PITCH.points.${p.id}`, p.source))
   FLAVOR_IDEAS.forEach((f) => push(`pitch.FLAVOR_IDEAS.${f.id}`, f.source))
   BRAND_FACTS.stats.forEach((s) => push(`pitch.BRAND_FACTS.${s.id}`, s.source))
+  CAMPAIGN_STATS.forEach((s) => push(`campaign.CAMPAIGN_STATS.${s.id}`, s.source))
+  WHAT_THEY_WANT.forEach((w) => push(`campaign.WHAT_THEY_WANT.${w.id}`, w.source))
+  CAMPAIGN_TIMELINE.forEach((t) => push(`campaign.CAMPAIGN_TIMELINE.${t.date}`, t.source))
+  push('campaign.APPLY.requirements', APPLY.source)
+  APPLICANT_GROWTH.forEach((g) => push(`campaign.APPLICANT_GROWTH.${g.id}`, g.source))
+  APPLICANTS.forEach((a) =>
+    push(`applicants.${a.id}`, { label: `${a.creator} application video`, url: a.url }),
+  )
   return out
 }
 

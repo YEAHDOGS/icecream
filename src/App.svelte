@@ -4,6 +4,8 @@
   import PlayersPanel from "./components/PlayersPanel.svelte";
   import FlavorsPanel from "./components/FlavorsPanel.svelte";
   import PitchPanel from "./components/PitchPanel.svelte";
+  import CampaignPanel from "./components/CampaignPanel.svelte";
+  import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
   import logo from "./assets/logo.svg";
   import { SOURCE_COUNT } from "./data/index.js";
 
@@ -11,6 +13,8 @@
     { id: "market", label: "Market", component: MarketPanel },
     { id: "players", label: "Players", component: PlayersPanel },
     { id: "flavors", label: "Flavors", component: FlavorsPanel },
+    { id: "campaign", label: "The Campaign", short: "Campaign", component: CampaignPanel },
+    { id: "field", label: "The Field", short: "Field", component: ApplicantsPanel },
     { id: "pitch", label: "The Pitch", short: "Pitch", component: PitchPanel },
   ];
   const SWIPE_MIN_PX = 60;
