@@ -52,6 +52,12 @@ const RESTAURANT_CAFE = {
   date: 'Sep 2026',
 }
 
+const TIKTOK_TAG = {
+  label: 'TikTok #snoopishiring tag page',
+  url: 'https://www.tiktok.com/tag/snoopishiring',
+  date: 'Sep 2026',
+}
+
 /** @type {import('./schema.js').Stat[]} */
 export const CAMPAIGN_STATS = [
   {
@@ -161,8 +167,7 @@ export const CAMPAIGN_TIMELINE = [
 
 export const APPLY = {
   url: 'https://deel.com/snoop',
-  cta: 'Apply at deel.com/snoop',
-  requirements: [
+  cta: 'Apply at deel.com/snoop',  requirements: [
     'Speak English, hold a valid passport',
     'Available for the full three months',
     'Able to do sensory evaluation of dairy ice cream',
@@ -170,6 +175,33 @@ export const APPLY = {
   ],
   source: USA_TODAY,
 }
+
+/**
+ * Verified official outbound links for the campaign. These are links, not
+ * figures, so they sit outside the citation gate — but every URL was
+ * confirmed live before it landed here.
+ * @type {Array<{ id: string, label: string, url: string, note: string }>}
+ */
+export const OFFICIAL_LINKS = [
+  {
+    id: 'drbombay',
+    label: 'Dr. Bombay — official site',
+    url: 'https://drbombayfoods.com',
+    note: 'The brand\u2019s own storefront: the flavor lineup, the story, the news.',
+  },
+  {
+    id: 'deel',
+    label: 'Deel — apply for the role',
+    url: 'https://deel.com/snoop',
+    note: 'The official application page for the International Ice Cream Taste Tester.',
+  },
+  {
+    id: 'announcement',
+    label: 'Snoop\u2019s LinkedIn announcement',
+    url: 'https://www.linkedin.com/news/story/snoop-dogg-seeks-to-hire-30k-ice-cream-taster-7588204/',
+    note: 'The campaign announcement as covered on LinkedIn, with Snoop\u2019s own updates on applicant counts.',
+  },
+]
 
 /**
  * Applicant momentum. Only hard, sourced numbers — no invented platform,
@@ -206,5 +238,59 @@ export const APPLICANT_GROWTH = [
     num: 500000,
     projection: true,
     source: LINKEDIN_NEWS,
+  },
+]
+
+/**
+ * "Know your competition": the applicant pool, split into measured counts,
+ * labeled estimates, and one honest unknown. Every figure is date-stamped;
+ * nothing here is presented as more precise than its source allows.
+ * @type {import('./schema.js').Stat[]}
+ */
+export const COMPETITION_STATS = [
+  {
+    id: 'comp-measured',
+    label: 'Applications, counted (measured)',
+    value: '~275,000',
+    num: 275000,
+    note: 'A measured count from Deel\u2019s recruitment team, stated by head of recruitment Alan Price on LinkedIn, Sep 7, 2026 \u2014 not an estimate.',
+    source: LINKEDIN_NEWS,
+  },
+  {
+    id: 'comp-today',
+    label: 'Applications today (estimate)',
+    value: '275K\u2013300K',
+    note: 'Estimate extrapolated from the 200K (~Sep 2) \u2192 275K (Sep 7) run-rate. Counts as of Sep 8, 2026.',
+    source: LINKEDIN_NEWS,
+  },
+  {
+    id: 'comp-projection',
+    label: 'Deel\u2019s projection (not a count)',
+    value: '500K+*',
+    note: 'Deel is "betting on over half a million applications" \u2014 a company projection, not a count. Projected final ~425,000\u2013550,000 by Sep 17.',
+    source: LINKEDIN_NEWS,
+  },
+  {
+    id: 'comp-countries',
+    label: 'Countries in the pool',
+    value: '133',
+    num: 133,
+    note: 'Company claim, per Snoop\u2019s LinkedIn update (~Sep 2, 2026).',
+    source: LINKEDIN_NEWS,
+  },
+  {
+    id: 'comp-impressions',
+    label: 'Campaign impressions (reach)',
+    value: '100M+',
+    num: 100000000,
+    note: 'Deel via press (~Sep 6, 2026). A reach estimate \u2014 not applicants.',
+    source: BACKYARD,
+  },
+  {
+    id: 'comp-videos',
+    label: 'Public video pitches',
+    value: 'No public count',
+    note: 'No aggregate exists: TikTok/Instagram hashtag counts are login-gated and YouTube shows no total. The form pool is ~300K; public video pitches are the visible minority, but the exact number can\u2019t be verified.',
+    source: TIKTOK_TAG,
   },
 ]

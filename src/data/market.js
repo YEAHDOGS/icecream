@@ -98,3 +98,94 @@ export const SEGMENTS = [
     },
   },
 ]
+
+const DAIRY_FOODS_CIRCANA = {
+  label: 'Dairy Foods / Circana',
+  url: 'https://www.dairyfoods.com/articles/98653-state-of-the-dairy-industry-lapping-up-luscious-ice-cream',
+  date: '2025',
+}
+
+/**
+ * Three more cuts of the same appetite. Combined with GLOBAL_STATS' global
+ * total and US retail figure, they feed the "Market scale" bar chart — every
+ * figure already existed in the data (notes and trend evidence) with its own
+ * HTTPS source; this just structures them.
+ * @type {import('./schema.js').Stat[]}
+ */
+export const MARKET_SCALE = [
+  {
+    id: 'us-novelties',
+    label: 'US frozen novelties',
+    value: '$8.9B',
+    num: 8.9e9,
+    note: 'Frozen novelties, 52 weeks to Sep 2025 — slightly ahead of packaged ice cream itself.',
+    source: DAIRY_FOODS_CIRCANA,
+  },
+  {
+    id: 'protein-market',
+    label: 'Global protein ice cream',
+    value: '$2.8B',
+    num: 2.8e9,
+    note: 'About $2.8B in 2025, with North America about 44% of it — the fastest-growing frozen dessert segment.',
+    source: {
+      label: 'Fortune Business Insights',
+      url: 'https://www.fortunebusinessinsights.com/protein-ice-cream-market-116630',
+      date: '2025',
+    },
+  },
+  {
+    id: 'plantbased-sales',
+    label: 'US plant-based ice cream',
+    value: '$252M',
+    num: 252e6,
+    note: 'Fell 2.5% in the year to Sep 2024 — small and shrinking while sorbets surge.',
+    source: {
+      label: 'FoodNavigator / SPINS',
+      url: 'https://www.foodnavigator.com/Article/2024/10/25/spins-data-shows-sorbets-on-the-rise-in-frozen-desserts/',
+      date: 'Oct 2024',
+    },
+  },
+]
+
+/**
+ * America's favorite flavors, from the IDFA / Morning Consult survey. The
+ * percentages already lived in the us-love stat's note; this structures them
+ * for the flavor-share bar chart.
+ * @type {import('./schema.js').Stat[]}
+ */
+export const US_FLAVOR_SHARE = [
+  {
+    id: 'chocolate',
+    label: 'Chocolate',
+    value: '38%',
+    num: 0.38,
+    source: {
+      label: 'IDFA / Morning Consult',
+      url: 'https://www.idfa.org/news/chocolate-returns-to-no-1-and-butter-pecan-surpasses-vanilla-ahead-of-national-ice-cream-day',
+      date: '2026',
+    },
+  },
+  {
+    id: 'butter-pecan',
+    label: 'Butter pecan',
+    value: '27%',
+    num: 0.27,
+    note: 'Passed vanilla for the first time in 2026.',
+    source: {
+      label: 'IDFA / Morning Consult',
+      url: 'https://www.idfa.org/news/chocolate-returns-to-no-1-and-butter-pecan-surpasses-vanilla-ahead-of-national-ice-cream-day',
+      date: '2026',
+    },
+  },
+  {
+    id: 'vanilla',
+    label: 'Vanilla',
+    value: '25%',
+    num: 0.25,
+    source: {
+      label: 'IDFA / Morning Consult',
+      url: 'https://www.idfa.org/news/chocolate-returns-to-no-1-and-butter-pecan-surpasses-vanilla-ahead-of-national-ice-cream-day',
+      date: '2026',
+    },
+  },
+]

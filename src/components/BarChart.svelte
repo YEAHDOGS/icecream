@@ -6,9 +6,9 @@
    * Bars are thin, grow from a shared baseline, and every row is direct-labeled,
    * so the chart never relies on color alone.
    * @typedef {{ label: string, num: number, value: string, color?: string, source?: import('../data/schema.js').Source }} Row
-   * @type {{ rows: Row[], title?: string, source?: import('../data/schema.js').Source }}
+   * @type {{ rows: Row[], title?: string, source?: import('../data/schema.js').Source, sources?: import('../data/schema.js').Source[], note?: string }}
    */
-  let { rows = [], title = "", source = null } = $props();
+  let { rows = [], title = "", source = null, sources = [], note = "" } = $props();
 
   const max = $derived(Math.max(...rows.map((r) => r.num || 0), 1));
   /** @param {Row} r */
@@ -33,8 +33,17 @@
       </li>
     {/each}
   </ol>
+  {#if note}
+    <p class="m-0 mt-1.5 text-[0.66rem] leading-snug text-muted">{note}</p>
+  {/if}
   {#if source}
     <div class="mt-2"><Cite {source} compact /></div>
+  {:else if sources.length}
+    <div class="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+      {#each sources as s (s.url)}
+        <Cite source={s} compact />
+      {/each}
+    </div>
   {/if}
 </figure>
 
