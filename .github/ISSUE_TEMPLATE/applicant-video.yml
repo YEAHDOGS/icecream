@@ -1,0 +1,49 @@
+name: "\U0001F366 Submit your applicant video"
+description: Add your Snoop Dogg x Deel x Dr. Bombay Ice Cream Taste Tester application video to The Field feed.
+title: "[video] "
+labels: ["applicant-video"]
+body:
+  - type: input
+    id: video-url
+    attributes:
+      label: Video URL
+      description: Direct link to your public application video (YouTube, TikTok, Instagram, or X).
+      placeholder: https://www.youtube.com/watch?v=...
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - YouTube
+        - TikTok
+        - Instagram
+        - X
+    validations:
+      required: true
+  - type: input
+    id: handle
+    attributes:
+      label: Display name / handle
+      description: How should you be credited in the feed?
+      placeholder: "@yourhandle"
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: One-line pitch
+      description: One sentence on your video's angle (funny, business plan, taste-test, musical...).
+      placeholder: A taste-test tour of every Dr. Bombay pint, ranked.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: This video is my own application video for the International Ice Cream Taste Tester role, and the link is public.
+          required: true
+        - label: I understand videos appear in randomized order — no applicant is ranked above another.
+          required: true

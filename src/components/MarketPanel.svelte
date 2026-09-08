@@ -46,7 +46,7 @@
   <!-- Detail: selected country + largest markets -->
   <aside class="detail">
     {#if country}
-      <div class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden">
+      <div class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden max-lg:overflow-visible overscroll-contain">
         <div class="flex items-baseline justify-between gap-2">
           <h2 class="m-0 text-base xl:text-lg font-semibold truncate">
             {country.name}
