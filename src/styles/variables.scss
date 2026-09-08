@@ -1,0 +1,35 @@
+// Theme tokens. Every color on the site is defined here and exposed as a CSS
+// variable in app.scss — components reference var(--...) and never raw hex.
+//
+// Palette: espresso surfaces, cream ink, butterscotch-gold accent. The four
+// categorical hues were validated (OKLab CVD ΔE) against $bg-card for charts
+// that carry more than one series; single-series charts use $accent alone.
+
+// Surfaces
+$bg-app: #0e0b0a;          // page plane
+$bg-card: #171210;         // panels, chart surface
+$bg-card-hover: #1f1815;
+$border: rgba(247, 239, 228, 0.08);
+$border-strong: rgba(247, 239, 228, 0.16);
+
+// Ink
+$ink: #f7efe4;             // primary text (cream)
+$ink-2: #c9bdae;           // secondary text
+$ink-muted: #8f857a;       // captions, axis labels
+
+// Accent (brand, money, sequential hue for the map)
+$accent: #c98500;
+$accent-rgb: 201, 133, 0;
+$accent-bright: #f2b23a;   // hover / hero figure
+
+// Categorical chart slots (fixed order — never cycled)
+$series-1: #c98500;        // gold
+$series-2: #3987e5;        // blue
+$series-3: #e66767;        // coral
+$series-4: #199e70;        // green
+
+// Sequential ramp for the choropleth: darkest = smallest market. Seven steps,
+// one hue, monotonic lightness. Countries with no data use $map-empty.
+$map-ramp: #2a2014, #46331a, #654a1f, #866224, #a97c2a, #cc9630, #f2b23a;
+$map-empty: rgba(247, 239, 228, 0.05);
+$map-stroke: rgba(247, 239, 228, 0.12);
