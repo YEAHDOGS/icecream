@@ -1,12 +1,24 @@
 <script>
   import VideoCard from "./VideoCard.svelte";
   import { APPLICANTS, LAST_UPDATED } from "../data/applicants.js";
+  import { SCOUT_LOG } from "../data/scoutLog.js";
 
   const ISSUE_URL =
     "https://github.com/YEAHDOGS/icecream/issues/new?template=applicant-video.yml";
 
   const PLATFORMS = ["all", "youtube", "tiktok", "instagram", "x"];
   const ALL_TAGS = ["all", ...new Set(APPLICANTS.flatMap((a) => a.tags))];
+
+  const latestScout = SCOUT_LOG[SCOUT_LOG.length - 1];
+  const totalScouted = SCOUT_LOG.reduce((n, e) => n + e.videosFound, 0);
+  let showLogHistory = $state(false);
+
+  /** '2026-09-08' -> 'Sep 8' */
+  function shortDate(iso) {
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const [, m, d] = iso.split("-").map(Number);
+    return `${months[m - 1]} ${d}`;
+  }
 
   let platform = $state("all");
   let tag = $state("all");
@@ -53,6 +65,44 @@
           <span class="font-semibold text-ink">random order</span> — every
           applicant gets the same stage. Nobody is ranked, scored, or boosted.
         </p>
+      </div>
+      <!-- Scouting log: daily discovery stats, always labeled estimates -->
+      <div class="scout">
+        <div class="flex items-baseline justify-between gap-2">
+          <p class="eyebrow m-0">Scouting log</p>
+          {#if SCOUT_LOG.length > 1}
+            <button
+              type="button"
+              class="linklike"
+              onclick={() => (showLogHistory = !showLogHistory)}
+              aria-expanded={showLogHistory}
+            >
+              {showLogHistory ? "Hide history" : "History"}
+            </button>
+          {/if}
+        </div>
+        <p class="m-0 mt-0.5 text-[0.72rem] text-ink-2">
+          <span class="font-bold text-accent-bright text-sm tabular-nums"
+            >{latestScout.videosFound}</span
+          >
+          applicant videos verified {shortDate(latestScout.date)}
+          <span class="text-muted">· community-visible sample, estimate</span>
+          <span class="text-muted">· {totalScouted} scouted to date</span>
+        </p>
+        {#if showLogHistory}
+          <ul class="m-0 mt-1 p-0 list-none flex flex-col gap-1">
+            {#each [...SCOUT_LOG].reverse() as e (e.date)}
+              <li class="grid grid-cols-[4.5rem_1fr] gap-2 text-[0.68rem] leading-snug">
+                <span class="font-semibold text-accent-bright tabular-nums"
+                  >{shortDate(e.date)}</span
+                >
+                <span class="text-ink-2">
+                  {e.videosFound} verified · {e.note}
+                </span>
+              </li>
+            {/each}
+          </ul>
+        {/if}
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <button type="button" class="shuffle" onclick={() => (order = shuffledOrder())}>
@@ -117,6 +167,13 @@
 </section>
 
 <style lang="scss">
+  .scout {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(247, 239, 228, 0.02);
+  }
+
   .shuffle {
     display: inline-flex;
     align-items: center;

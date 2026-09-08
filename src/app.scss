@@ -67,13 +67,14 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-// Section eyebrow label used across panels.
+// Section eyebrow label used across panels. One accent, everywhere:
+// butterscotch gold. Kickers in accent, headlines in cream, body in ink-2.
 .eyebrow {
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--accent-bright);
 }
 
 // Card surface.

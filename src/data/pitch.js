@@ -154,7 +154,7 @@ export const BRAND_FACTS = {
       label: 'International Ice Cream Taste Tester',
       value: '$10K / mo',
       num: 10000,
-      note: 'Three-month remote contract, open worldwide. Applications Aug 27 to Sep 18, 2026, hired through Deel.',
+      note: 'Three-month remote contract, open worldwide. Applications Aug 27 to Sep 17, 2026, hired through Deel.',
       source: NBC_JOB,
     },
     {

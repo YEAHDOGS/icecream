@@ -3,6 +3,8 @@
   import Stat from "./Stat.svelte";
   import BarChart from "./BarChart.svelte";
   import Cite from "./Cite.svelte";
+  import HeroImage from "./HeroImage.svelte";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import { GLOBAL_STATS } from "../data/market.js";
   import { COUNTRIES, DEFAULT_COUNTRY } from "../data/countries.js";
   import { PALATES } from "../data/trends.js";
@@ -23,6 +25,7 @@
   <!-- Rail: hero + supporting stats -->
   <aside class="rail">
     <div class="hero-slot"><Stat stat={hero} hero /></div>
+    <div class="rail-hero"><HeroImage image={TAB_IMAGES.market} /></div>
     {#each stats as s (s.id)}
       <Stat stat={s} />
     {/each}
@@ -46,7 +49,7 @@
   <!-- Detail: selected country + largest markets -->
   <aside class="detail">
     {#if country}
-      <div class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden max-lg:overflow-visible overscroll-contain">
+      <div class="card p-3 xl:p-4 flex flex-col gap-2 lg:min-h-0 overflow-y-auto overflow-x-hidden max-lg:overflow-visible overscroll-contain">
         <div class="flex items-baseline justify-between gap-2">
           <h2 class="m-0 text-base xl:text-lg font-semibold truncate">
             {country.name}
@@ -132,6 +135,11 @@
   .hero-slot {
     grid-column: 1 / -1;
     display: grid;
+  }
+
+  .rail-hero {
+    grid-column: 1 / -1;
+    min-width: 0;
   }
 
   .detail {

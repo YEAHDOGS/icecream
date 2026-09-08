@@ -56,6 +56,11 @@ The app is an `h-dvh` fixed shell (`App.svelte`) with `overflow: hidden` on
   `md:grid-rows-[...]` constraints (see PlayersPanel
   `md:grid-rows-[minmax(0,1fr)_auto]`) or content clips unreachable at
   768–1024px. Verify with screenshots at 390×844, 768×1024, 1440×900.
+- Audit lesson (Sep 8, 2026): the first collapse fix covered Campaign/Players
+  but missed Flavors/Pitch, and the live bug only showed in the missed tabs.
+  Always audit EVERY panel for the item-and-container pattern, and verify with
+  real headless screenshots at all three viewports — DOM bounding-box checks
+  passed while the live site was broken.
 
 ## 3. Data conventions
 
@@ -73,3 +78,31 @@ The app is an `h-dvh` fixed shell (`App.svelte`) with `overflow: hidden` on
   GitHub Pages. Base path is `/icecream/` in `vite.config.js`; change to `/`
   only when moving to a custom domain.
 - New GitHub issue templates live in `.github/ISSUE_TEMPLATE/`.
+
+## 5. Imagery / assets
+
+- Tab hero images live in `src/assets/img/` and are wired through
+  `src/data/imagery.js` (`TAB_IMAGES[tab].src`), rendered by
+  `src/components/HeroImage.svelte` with a visible credit caption.
+- To swap in a new photo (e.g. the founder's own): drop the optimized file into
+  `src/assets/img/` and update the `src` import in `imagery.js` — one line,
+  no component changes. Keep landscape orientation.
+- Optimize before committing: max 1600px wide, WebP quality ~75, target
+  <200KB each. Never hotlink; vendor every image into the repo.
+- Images are not figures under the citation gate, but every one carries a
+  visible credit (`credit` + `creditUrl`).
+- `BUILD_TAG` in `imagery.js` is stamped on the app root as `data-build` —
+  grep the served JS bundle for it to confirm a deploy went live.
+
+## 6. Applicant feed + scouting log
+
+- Applicant entries (`src/data/applicants.js`): real URLs only, each verified
+  to load before it lands in the file. Never invent URLs, handles, or titles.
+  Dedupe by URL. Tags come from the fixed enum in the file's `@typedef`.
+  Fairness is a feature: randomized default order, never ranked or scored.
+- Scouting log (`src/data/scoutLog.js`): APPEND-ONLY. The daily job adds one
+  entry per day at the END: `{ date: 'YYYY-MM-DD', videosFound: <int>,
+  note: '... estimate' }`. `videosFound` = new videos VERIFIED that day.
+  Every count is labeled an estimate in the UI — the community-visible
+  sample, not Deel's internal total. `data.test.js` enforces the schema
+  (valid ISO dates, unique, ascending).

@@ -4,6 +4,9 @@
   import BarChart from "./BarChart.svelte";
   import PieChart from "./PieChart.svelte";
   import Countdown from "./Countdown.svelte";
+  import HeroImage from "./HeroImage.svelte";
+  import BuyButtons from "./BuyButtons.svelte";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import {
     LAST_UPDATED,
     DEADLINE_ISO,
@@ -41,6 +44,7 @@
         campaign-reported estimates, not audited numbers.
       </p>
     </div>
+    <HeroImage image={TAB_IMAGES.campaign} />
     <div
       class="flex flex-col gap-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
@@ -100,9 +104,13 @@
       </a>
       <div><Cite source={APPLY.source} compact /></div>
     </div>
-    <div class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 md:flex-1 md:overflow-hidden">
+    <div class="card p-3 xl:p-4 flex flex-col gap-2">
+      <p class="eyebrow m-0">Taste the homework</p>
+      <BuyButtons only={["walmart"]} />
+    </div>
+    <div class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 md:flex-1 md:overflow-hidden">
       <p class="eyebrow m-0">Press &amp; milestones</p>
-      <ol class="m-0 p-0 list-none flex flex-col gap-1.5 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
+      <ol class="m-0 p-0 list-none flex flex-col gap-1.5 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
         {#each CAMPAIGN_TIMELINE as t (t.date)}
           <li class="grid grid-cols-[5.5rem_1fr] gap-2 text-[0.72rem] leading-snug">
             <span class="font-semibold text-accent-bright tabular-nums">{t.date}</span>

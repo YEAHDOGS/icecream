@@ -1,5 +1,9 @@
 <script>
   import Cite from "./Cite.svelte";
+  import HeroImage from "./HeroImage.svelte";
+  import BuyButtons from "./BuyButtons.svelte";
+  import Disclosure from "./Disclosure.svelte";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import { TRENDING, GAPS, PALATES } from "../data/trends.js";
 
   let region = $state(PALATES[0].code);
@@ -9,9 +13,29 @@
 <section
   class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-12 scroll-y md:overflow-hidden md:grid-rows-[minmax(0,1fr)_auto]"
 >
+  <!-- Taste the homework: one-click retail -->
+  <div
+    class="card p-3 xl:p-4 flex flex-col sm:flex-row gap-3 sm:items-center md:min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-12"
+  >
+    <div class="sm:w-60 lg:w-72 shrink-0 min-w-0">
+      <HeroImage image={TAB_IMAGES.flavors} />
+    </div>
+    <div class="flex flex-col gap-2 min-w-0">
+      <p class="eyebrow m-0">Taste the homework</p>
+      <p class="m-0 text-base xl:text-lg font-bold tracking-tight">
+        Research is better with a spoon in it.
+      </p>
+      <p class="m-0 text-[0.74rem] leading-snug text-ink-2">
+        The full Dr. Bombay lineup — the pints behind every trend call on this
+        tab.
+      </p>
+      <BuyButtons />
+    </div>
+  </div>
+
   <!-- Trending now -->
   <div
-    class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 sm:col-span-2 md:col-span-2 xl:col-span-7 xl:overflow-hidden"
+    class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 sm:col-span-2 md:col-span-2 xl:col-span-7 xl:overflow-hidden"
   >
     <div>
       <p class="eyebrow m-0">Trending now</p>
@@ -20,7 +44,7 @@
       </p>
     </div>
     <div
-      class="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
+      class="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       {#each TRENDING as t (t.id)}
         <article class="trend">
@@ -37,7 +61,7 @@
 
   <!-- Regional palates -->
   <div
-    class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 sm:col-span-1 md:col-span-1 xl:col-span-3 xl:overflow-hidden"
+    class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 sm:col-span-1 md:col-span-1 xl:col-span-3 xl:overflow-hidden"
   >
     <p class="eyebrow m-0">Regional palates</p>
     <div class="flex flex-wrap gap-1">
@@ -51,7 +75,7 @@
       {/each}
     </div>
     {#if current}
-      <ul class="m-0 p-0 list-none flex flex-col gap-1 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
+      <ul class="m-0 p-0 list-none flex flex-col gap-1 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
         {#each current.flavors as f}
           <li class="flavor">{f}</li>
         {/each}
@@ -65,15 +89,16 @@
 
   <!-- Gaps -->
   <div
-    class="card p-3 xl:p-4 flex flex-col gap-2 min-h-0 sm:col-span-1 md:col-span-3 xl:col-span-2 xl:overflow-hidden"
+    class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 sm:col-span-1 md:col-span-3 xl:col-span-2 xl:overflow-hidden"
   >
     <p class="eyebrow m-0">Open lanes</p>
-    <ul class="m-0 p-0 list-none flex flex-col gap-2 min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain md:grid md:grid-cols-3 xl:flex">
-      {#each GAPS as g (g.id)}
-        <li class="text-[0.72rem] leading-snug">
-          <span class="font-semibold text-ink">{g.name}.</span>
-          <span class="text-ink-2"> {g.text}</span>
-          <div class="mt-1"><Cite source={g.source} compact /></div>
+    <ul class="m-0 p-0 list-none flex flex-col gap-1.5 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain md:grid md:grid-cols-3 xl:flex">
+      {#each GAPS as g, i (g.id)}
+        <li class="min-w-0">
+          <Disclosure title={g.name} open={i === 0}>
+            <p class="m-0 text-[0.72rem] leading-snug text-ink-2">{g.text}</p>
+            <div class="mt-1"><Cite source={g.source} compact /></div>
+          </Disclosure>
         </li>
       {/each}
     </ul>
