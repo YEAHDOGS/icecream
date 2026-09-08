@@ -17,7 +17,7 @@
 export const SCOUT_LOG = [
   {
     date: '2026-09-08',
-    videosFound: 31,
-    note: 'First sweep: community-visible sample, estimate',
+    videosFound: 61,
+    note: 'First sweep + TikTok hashtag pass: 61 new verified videos total; X blocked by login wall. Community-visible sample, estimate.',
   },
 ]
