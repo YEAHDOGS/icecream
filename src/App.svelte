@@ -1,31 +1,33 @@
 <script>
   import TabNav from "./components/TabNav.svelte";
   import MarketPanel from "./components/MarketPanel.svelte";
-  import PlayersPanel from "./components/PlayersPanel.svelte";
-  import FlavorsPanel from "./components/FlavorsPanel.svelte";
   import PitchPanel from "./components/PitchPanel.svelte";
-  import CampaignPanel from "./components/CampaignPanel.svelte";
+  import JobPanel from "./components/JobPanel.svelte";
   import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
   import logo from "./assets/logo.svg";
   import { SOURCE_COUNT } from "./data/index.js";
   import { BUILD_TAG } from "./data/imagery.js";
 
   const TABS = [
-    { id: "market", label: "Market", component: MarketPanel },
-    { id: "players", label: "Players", component: PlayersPanel },
-    { id: "flavors", label: "Flavors", component: FlavorsPanel },
-    { id: "campaign", label: "The Campaign", short: "Campaign", component: CampaignPanel },
+    { id: "job", label: "The Job", short: "Job", component: JobPanel },
+    { id: "market", label: "The Market", short: "Market", component: MarketPanel },
     { id: "field", label: "The Field", short: "Field", component: ApplicantsPanel },
     { id: "pitch", label: "The Pitch", short: "Pitch", component: PitchPanel },
   ];
+
+  // Retired tab ids keep working as deep links after the 6 → 4 tab merge.
+  const TAB_ALIASES = { campaign: "job", flavors: "job", players: "market" };
   const SWIPE_MIN_PX = 60;
   const TITLE = "The Scoop";
   const SUBTITLE = "Global ice cream market, fully cited";
 
-  const fromHash = () => location.hash.replace("#", "");
-  let active = $state(
-    TABS.some((t) => t.id === fromHash()) ? fromHash() : TABS[0].id,
-  );
+  const fromHash = () => {
+    const raw = location.hash.replace("#", "");
+    if (TABS.some((t) => t.id === raw)) return raw;
+    if (TAB_ALIASES[raw]) return TAB_ALIASES[raw];
+    return TABS[0].id;
+  };
+  let active = $state(fromHash());
   const Panel = $derived(TABS.find((t) => t.id === active)?.component);
 
   /** @param {string} id */

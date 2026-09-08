@@ -152,12 +152,15 @@ export const CHALLENGERS = [
   },
 ]
 
-/** What ice cream businesses have actually sold for. */
+/** What ice cream businesses have actually sold for. `num` is the USD
+ *  arithmetic of the displayed value — the figures were already cited here. */
+/** @type {Array<{ id: string, label: string, value: string, num: number, source: import('./schema.js').Source }>} */
 export const CELEBRITY_COMPS = [
   {
     id: 'bj-unilever',
     label: 'Ben & Jerry’s to Unilever, 2000',
     value: '$326M',
+    num: 326e6,
     source: {
       label: 'Fortune',
       url: 'https://fortune.com/2025/04/23/ben-and-jerry-sold-out-to-unilever-25-years-ago-now-theyre-going-to-war/',
@@ -168,6 +171,7 @@ export const CELEBRITY_COMPS = [
     id: 'nestle-froneri',
     label: 'Nestlé US ice cream to Froneri, 2020',
     value: '$4.0B',
+    num: 4.0e9,
     source: {
       label: 'PAI Partners',
       url: 'https://www.paipartners.com/mediaitem/pai-partners-backed-froneri-announces-acquisition-of-nestles-us-ice-cream-business-for-4-0-billion/',
@@ -178,6 +182,7 @@ export const CELEBRITY_COMPS = [
     id: 'dunkin-inspire',
     label: 'Dunkin’ + Baskin-Robbins to Inspire, 2020',
     value: '$11.3B',
+    num: 11.3e9,
     source: {
       label: 'Inspire Brands',
       url: 'https://inspirebrands.com/inspire-brands-to-acquire-dunkin-brands-in-11-3-billion-transaction/',
@@ -188,6 +193,7 @@ export const CELEBRITY_COMPS = [
     id: 'froneri-valuation',
     label: 'Froneri valuation, 2025',
     value: '$17.6B',
+    num: 17.6e9,
     source: {
       label: 'MarketScreener / Dow Jones',
       url: 'https://www.marketscreener.com/news/ice-cream-maker-froneri-hits-17-6-billion-valuation-in-funding-deal-update-ce7d5bdedf8bf527',

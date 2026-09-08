@@ -1,9 +1,9 @@
-import { GLOBAL_STATS, SEGMENTS } from './market.js'
+import { GLOBAL_STATS, SEGMENTS, MARKET_SCALE, US_FLAVOR_SHARE } from './market.js'
 import { COUNTRIES } from './countries.js'
 import { GIANTS, CHALLENGERS, CELEBRITY_COMPS, ARC } from './competitors.js'
 import { TRENDING, GAPS, PALATES } from './trends.js'
 import { PITCH, FLAVOR_IDEAS, BRAND_FACTS } from './pitch.js'
-import { CAMPAIGN_STATS, WHAT_THEY_WANT, CAMPAIGN_TIMELINE, APPLY, APPLICANT_GROWTH } from './campaign.js'
+import { CAMPAIGN_STATS, WHAT_THEY_WANT, CAMPAIGN_TIMELINE, APPLY, APPLICANT_GROWTH, COMPETITION_STATS } from './campaign.js'
 import { APPLICANTS } from './applicants.js'
 import { BUY_LINKS } from './buy.js'
 
@@ -17,6 +17,8 @@ export function allCitations() {
   const push = (where, source) => out.push({ where, source })
   GLOBAL_STATS.forEach((s) => push(`market.GLOBAL_STATS.${s.id}`, s.source))
   SEGMENTS.forEach((s) => push(`market.SEGMENTS.${s.id}`, s.source))
+  MARKET_SCALE.forEach((s) => push(`market.MARKET_SCALE.${s.id}`, s.source))
+  US_FLAVOR_SHARE.forEach((s) => push(`market.US_FLAVOR_SHARE.${s.id}`, s.source))
   COUNTRIES.forEach((c) => {
     push(`countries.${c.code}`, c.source)
     if (c.perCapita) push(`countries.${c.code}.perCapita`, c.perCapita.source)
@@ -36,6 +38,7 @@ export function allCitations() {
   CAMPAIGN_TIMELINE.forEach((t) => push(`campaign.CAMPAIGN_TIMELINE.${t.date}`, t.source))
   push('campaign.APPLY.requirements', APPLY.source)
   APPLICANT_GROWTH.forEach((g) => push(`campaign.APPLICANT_GROWTH.${g.id}`, g.source))
+  COMPETITION_STATS.forEach((s) => push(`campaign.COMPETITION_STATS.${s.id}`, s.source))
   APPLICANTS.forEach((a) =>
     push(`applicants.${a.id}`, { label: `${a.creator} application video`, url: a.url }),
   )

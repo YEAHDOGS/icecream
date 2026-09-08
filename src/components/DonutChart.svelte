@@ -1,55 +1,45 @@
 <script>
-  import { APPLICANTS } from "../data/applicants.js";
-
   /**
-   * Platform mix of the applicant videos listed in The Field.
-   * Computed live from applicants.js — updates automatically as entries are
-   * added. This is a sample of scouted videos, NEVER Deel's applicant data.
-   * One hue only (gold tints) — no rainbow soup.
+   * Generic donut chart. One hue only: slices use a gold-tint ramp so the
+   * chart reads on dark without rainbow soup. Direct-labeled in the legend,
+   * so it never relies on color alone.
+   * @typedef {{ label: string, frac: number }} Slice
+   * @type {{ slices: Slice[], centerTop?: string, centerBottom?: string, title?: string, note?: string }}
    */
+  let { slices = [], centerTop = "", centerBottom = "", title = "", note = "" } = $props();
 
-  /** Gold-tint ramp: darkest gold first, fading down. Direct-labeled anyway. */
   const TINTS = [
     "var(--accent)",
     "rgba(var(--accent-rgb), 0.62)",
     "rgba(var(--accent-rgb), 0.38)",
     "rgba(var(--accent-rgb), 0.22)",
   ];
-  const ORDER = ["youtube", "tiktok", "instagram", "x"];
 
-  const total = $derived(APPLICANTS.length);
-  const slices = $derived(
-    ORDER.map((p) => ({
-      platform: p,
-      count: APPLICANTS.filter((a) => a.platform === p).length,
-    }))
-      .filter((s) => s.count > 0)
-      .map((s) => ({ ...s, frac: total ? s.count / total : 0 })),
-  );
-
-  // Donut geometry.
   const R = 54;
   const C = 2 * Math.PI * R;
+  const total = $derived(slices.reduce((a, s) => a + (s.frac || 0), 0));
+  const shown = $derived(slices.filter((s) => (s.frac || 0) > 0));
+
+  const aria = $derived(
+    `${title}: ${shown.map((s) => `${s.label} ${Math.round(s.frac * 100)}%`).join(", ")}`,
+  );
 </script>
 
-{#if total === 0}
-  <p class="m-0 text-[0.74rem] text-ink-2">
-    No applicant videos yet — the first scouted videos will chart here.
-  </p>
-{:else}
+{#if title}
+  <p class="eyebrow m-0 mb-2">{title}</p>
+{/if}
+{#if shown.length}
   <div class="pie-wrap">
     <svg
       viewBox="0 0 140 140"
       class="pie"
       role="img"
-      aria-label="Applicant videos on this page by platform: {slices
-        .map((s) => `${s.platform} ${s.count}`)
-        .join(', ')}"
+      aria-label={aria}
     >
-      {#each slices as s, i}
+      {#each shown as s, i}
         {@const dash = `${(s.frac * C).toFixed(2)} ${(C - s.frac * C).toFixed(2)}`}
         {@const offset = (
-          -slices.slice(0, i).reduce((acc, x) => acc + x.frac, 0) * C
+          -shown.slice(0, i).reduce((acc, x) => acc + (x.frac || 0), 0) * C
         ).toFixed(2)}
         <circle
           cx="70"
@@ -63,24 +53,27 @@
           transform="rotate(-90 70 70)"
         />
       {/each}
-      <text x="70" y="66" text-anchor="middle" class="pie-num">{total}</text>
-      <text x="70" y="84" text-anchor="middle" class="pie-cap">researched</text>
+      {#if centerTop}
+        <text x="70" y="66" text-anchor="middle" class="pie-num">{centerTop}</text>
+      {/if}
+      {#if centerBottom}
+        <text x="70" y="84" text-anchor="middle" class="pie-cap">{centerBottom}</text>
+      {/if}
     </svg>
     <ul class="m-0 p-0 list-none legend">
-      {#each slices as s, i}
+      {#each shown as s, i}
         <li>
           <span class="dot" style="background: {TINTS[i % TINTS.length]}"></span>
-          <span class="pname">{s.platform}</span>
-          <span class="pnum">{s.count} · {Math.round(s.frac * 100)}%</span>
+          <span class="pname">{s.label}</span>
+          <span class="pnum">{Math.round(s.frac * 100)}%</span>
         </li>
       {/each}
     </ul>
   </div>
 {/if}
-<p class="m-0 mt-2 text-[0.66rem] leading-snug text-muted">
-  Applicants researched (n={total}) — community-visible sample, not Deel's
-  full applicant data.
-</p>
+{#if note}
+  <p class="m-0 mt-2 text-[0.66rem] leading-snug text-muted">{note}</p>
+{/if}
 
 <style lang="scss">
   .pie-wrap {
@@ -132,7 +125,6 @@
 
   .pname {
     color: var(--ink-2);
-    text-transform: capitalize;
   }
 
   .pnum {
