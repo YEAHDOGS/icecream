@@ -89,8 +89,14 @@
     }
 
     &.active {
-      background: rgba(var(--accent-rgb), 0.16);
-      color: var(--accent-bright);
+      background: linear-gradient(
+        135deg,
+        var(--accent-bright),
+        var(--accent) 70%,
+        var(--accent-deep)
+      );
+      color: #1a1206;
+      box-shadow: 0 2px 14px rgba(var(--accent-rgb), 0.4);
     }
 
     &:focus-visible {

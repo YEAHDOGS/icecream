@@ -14,6 +14,7 @@
   --accent: #{$accent};
   --accent-rgb: #{$accent-rgb};
   --accent-bright: #{$accent-bright};
+  --accent-deep: #{$accent-deep};
   --series-1: #{$series-1};
   --series-2: #{$series-2};
   --series-3: #{$series-3};
@@ -82,6 +83,131 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 14px;
+}
+
+// Opt-in premium hover: gentle lift + gold hairline. Only on content tiles
+// (video cards, trend/idea tiles) — never on structural layout cards, so the
+// fixed h-dvh grid never shifts.
+.lift {
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--accent-rgb), 0.38);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Display headline treatment: cream melting into butterscotch gold.
+// One accent, everywhere — no multicolor excess.
+.gold-text {
+  background: linear-gradient(
+    100deg,
+    var(--ink) 5%,
+    var(--accent-bright) 55%,
+    var(--accent) 95%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Spotlight card: a soft gold ambience behind hero content. The glow is
+// inset and fades to transparent, so no overflow clipping is needed.
+.spotlight {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        420px 180px at 50% -40px,
+        rgba(var(--accent-rgb), 0.16),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(var(--accent-rgb), 0.05),
+        transparent 40%
+      );
+  }
+
+  > * {
+    position: relative;
+  }
+}
+
+// CTA sheen: a slow light sweep across primary buttons. Subtle by design.
+@keyframes sheen {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  55%,
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+}
+
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: sheen 3.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+// Staggered card entrance for grids (feed tiles). Delay comes from --d.
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enter-stagger {
+  animation: card-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: var(--d, 0ms);
+}
+
+// Film grain: one fixed noise layer over the whole app, barely-there.
+// pointer-events none; opacity kept low so video embeds stay clean.
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.45);
+  color: var(--ink);
 }
 
 // TV / ultra-wide: everything is rem-based, so one bump scales the whole UI.

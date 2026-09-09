@@ -32,15 +32,15 @@
 >
   <!-- Taste the homework: one-click retail -->
   <div
-    class="card p-3 xl:p-4 flex flex-col sm:flex-row gap-3 sm:items-center md:min-h-0 sm:col-span-2 md:col-span-3"
+    class="card spotlight p-3 xl:p-4 flex flex-col sm:flex-row gap-3 sm:items-center md:min-h-0 sm:col-span-2 md:col-span-3"
   >
     <div class="sm:w-60 lg:w-72 shrink-0 min-w-0">
       <HeroImage image={TAB_IMAGES.flavors} />
     </div>
     <div class="flex flex-col gap-2 min-w-0">
       <p class="eyebrow m-0">Taste the homework</p>
-      <p class="m-0 text-base xl:text-lg font-bold tracking-tight">
-        Research is better with a spoon in it.
+      <p class="m-0 text-xl xl:text-2xl font-bold tracking-tight text-balance">
+        <span class="gold-text">Research is better with a spoon in it.</span>
       </p>
       <p class="m-0 text-[0.74rem] leading-snug text-ink-2">
         The full Dr. Bombay lineup — the pints behind every trend call on this
@@ -56,8 +56,9 @@
   >
     <div>
       <p class="eyebrow m-0">The campaign, at a glance</p>
-      <p class="m-0 text-sm xl:text-base font-semibold">
-        Snoop Dogg × Deel × Dr. Bombay — International Ice Cream Taste Tester
+      <p class="m-0 text-base xl:text-lg font-bold tracking-tight text-balance">
+        <span class="gold-text">Snoop Dogg × Deel × Dr. Bombay</span>
+        <span class="text-ink-2 font-semibold"> — International Ice Cream Taste Tester</span>
       </p>
       <p class="m-0 mt-1 text-[0.68rem] text-muted">
         Counts as of {LAST_UPDATED}. Applicant and impression figures are
@@ -126,7 +127,7 @@
         </p>
         <div class="grid gap-2 grid-cols-1 sm:grid-cols-2">
           {#each TRENDING as t (t.id)}
-            <article class="trend">
+            <article class="trend lift">
               <div class="flex items-baseline justify-between gap-2">
                 <h3 class="m-0 text-sm font-semibold truncate">{t.name}</h3>
                 <span class="eyebrow shrink-0">{t.origin}</span>
@@ -186,7 +187,7 @@
           <li class="text-[0.72rem] leading-snug text-ink-2">{r}</li>
         {/each}
       </ul>
-      <a class="apply-btn" href={APPLY.url} target="_blank" rel="noopener noreferrer">
+      <a class="apply-btn btn-sheen" href={APPLY.url} target="_blank" rel="noopener noreferrer">
         {APPLY.cta}
         <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true">
           <path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />

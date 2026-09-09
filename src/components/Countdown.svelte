@@ -49,11 +49,12 @@
   .value {
     margin: 0;
     font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.05;
     letter-spacing: -0.01em;
     color: var(--accent-bright);
     font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
   }
 
   .unit {

@@ -78,11 +78,12 @@
     <div class="card p-3 xl:p-4 flex flex-col gap-2">
       <div>
         <p class="eyebrow m-0">The Field</p>
-        <p class="m-0 text-sm xl:text-base font-semibold">
+        <p class="m-0 text-lg xl:text-xl font-bold tracking-tight text-balance">
           Applicant videos, scouted from across social media
         </p>
         <p class="m-0 mt-1 text-[0.72rem] leading-snug text-ink-2">
-          {APPLICANTS.length} videos · updated {LAST_UPDATED} · shown in
+          <span class="gold-text font-bold text-sm tabular-nums">{APPLICANTS.length}</span>
+          videos · updated {LAST_UPDATED} · shown in
           <span class="font-semibold text-ink">random order</span> — every
           applicant gets the same stage. Nobody is ranked, scored, or boosted.
         </p>
@@ -171,8 +172,8 @@
     <!-- Feed -->
     {#if filtered.length}
       <div class="grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
-        {#each paged as a (a.id)}
-          <VideoCard entry={a} />
+        {#each paged as a, i (a.id)}
+          <VideoCard entry={a} index={i} />
         {/each}
       </div>
       {#if totalPages > 1}
