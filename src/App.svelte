@@ -5,6 +5,8 @@
   import JobPanel from "./components/JobPanel.svelte";
   import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
   import logo from "./assets/logo.svg";
+  import brandoIcon from "./assets/brand/captain-brando.png";
+  import dogsIcon from "./assets/brand/dogs.svg";
   import { SOURCE_COUNT } from "./data/index.js";
   import { BUILD_TAG } from "./data/imagery.js";
 
@@ -74,6 +76,27 @@
           {SUBTITLE}
         </p>
       </div>
+      <!-- the founder's own sites: permanent, visible on launch, every tab. -->
+      <nav class="brand-links" aria-label="the founder's sites">
+        <a
+          href="https://captainbrando.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="the founder — the founder's music career"
+        >
+          <img src={brandoIcon} alt="the founder logo" />
+          <span>the founder</span>
+        </a>
+        <a
+          href="https://wearedogs.net"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="DOGS — the founder's tech company"
+        >
+          <img src={dogsIcon} alt="DOGS logo" />
+          <span>DOGS</span>
+        </a>
+      </nav>
     </div>
     <div class="w-full sm:w-auto min-w-0"><TabNav tabs={TABS} {active} onSelect={select} /></div>
   </header>
@@ -104,6 +127,50 @@
   .app {
     background: var(--bg-app);
     color: var(--ink);
+  }
+
+  .brand-links {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: auto;
+    flex: 0 0 auto;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--ink-2);
+      font-size: 0.64rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: border-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+
+      img {
+        width: 15px;
+        height: 15px;
+        border-radius: 4px;
+        display: block;
+      }
+    }
+
+    @media (max-width: 380px) {
+      a span {
+        display: none;
+      }
+      a {
+        padding: 0.28rem 0.45rem;
+      }
+    }
   }
 
   .panel {

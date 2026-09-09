@@ -24,7 +24,7 @@ import campaignImg from '../assets/img/campaign.webp'
 import pitchImg from '../assets/img/pitch.webp'
 
 /** Build marker — grep the served JS bundle for this to confirm a deploy. */
-export const BUILD_TAG = 'scoop-4tab-redesign'
+export const BUILD_TAG = 'scoop-field-tapfix'
 
 /** @type {Record<'market'|'players'|'flavors'|'campaign'|'pitch', TabImage>} */
 export const TAB_IMAGES = {
