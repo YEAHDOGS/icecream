@@ -58,7 +58,7 @@
 <svelte:window onhashchange={() => select(fromHash() || TABS[0].id)} />
 
 <div
-  class="app h-dvh w-full grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] max-w-[1920px] mx-auto px-3 sm:px-4 md:px-6 xl:px-8 2xl:px-12"
+  class="app grain h-dvh w-full grid grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] max-w-[1920px] mx-auto px-3 sm:px-4 md:px-6 xl:px-8 2xl:px-12"
   data-build={BUILD_TAG}
 >
   <header
@@ -68,7 +68,7 @@
       <img src={logo} alt="" class="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9" />
       <div class="min-w-0 leading-tight">
         <h1
-          class="m-0 text-base sm:text-lg xl:text-xl 2xl:text-2xl font-semibold tracking-tight truncate"
+          class="m-0 text-base sm:text-lg xl:text-xl 2xl:text-2xl font-bold tracking-tight truncate gold-text"
         >
           {TITLE}
         </h1>
@@ -127,6 +127,48 @@
   .app {
     background: var(--bg-app);
     color: var(--ink);
+    position: relative;
+
+    // Ambient gold ambience: a soft crown glow up top, faint warmth low.
+    // pointer-events none, fades to transparent — never touches layout.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          640px 230px at 50% -70px,
+          rgba(var(--accent-rgb), 0.13),
+          transparent 70%
+        ),
+        radial-gradient(
+          900px 480px at 88% 112%,
+          rgba(var(--accent-rgb), 0.05),
+          transparent 70%
+        );
+    }
+  }
+
+  header {
+    position: relative;
+
+    // Gold hairline under the header — the one accent, drawn thin.
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(var(--accent-rgb), 0.55),
+        transparent
+      );
+      pointer-events: none;
+    }
   }
 
   .brand-links {

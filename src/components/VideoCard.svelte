@@ -9,8 +9,8 @@
     blockquoteHtml,
   } from "../lib/embeds.js";
 
-  /** @type {{ entry: import('../data/applicants.js').Applicant }} */
-  let { entry } = $props();
+  /** @type {{ entry: import('../data/applicants.js').Applicant, index?: number }} */
+  let { entry, index = 0 } = $props();
 
   let cardEl = $state(null);
   let embedEl = $state(null);
@@ -20,12 +20,18 @@
   let embedDead = $state(false);
   /** A real player iframe exists: hide the tap-to-open overlay so it stays usable. */
   let embedLive = $state(false);
+  /** Direct iframe (YouTube/Facebook) fired its load event. */
+  let frameLoaded = $state(false);
   let pollTimers = [];
 
   const yt = $derived(youtubeId(entry.url));
   const isTube = $derived(entry.platform === "youtube");
   const isFb = $derived(entry.platform === "facebook");
   const fbSrc = $derived(isFb ? facebookEmbedSrc(entry.url) : null);
+  /** Platforms that render a raw <iframe> instead of a platform script. */
+  const isDirectFrame = $derived((isTube && !!yt) || isFb);
+  /** Stagger cap: first 12 cards cascade, the rest settle together. */
+  const staggerMs = $derived(Math.min(index, 11) * 40);
 
   onMount(() => {
     const io = new IntersectionObserver(
@@ -77,9 +83,26 @@
       tick();
     });
   });
+
+  // Blank-iframe watchdog for YouTube/Facebook: cross-origin frames can't
+  // be introspected, but a frame that never fires `load` (blocked embed,
+  // dead video, network stall) looks exactly like a blank white box to the
+  // viewer — so after a grace period we swap in the tap-to-watch fallback
+  // instead of leaving a dead rectangle. onerror fails fast.
+  $effect(() => {
+    if (!inView || !isDirectFrame || embedDead || frameLoaded) return;
+    const t = setTimeout(() => {
+      if (!frameLoaded) embedDead = true;
+    }, 9000);
+    return () => clearTimeout(t);
+  });
 </script>
 
-<article bind:this={cardEl} class="vcard card">
+<article
+  bind:this={cardEl}
+  class="vcard card lift enter-stagger"
+  style={`--d: ${staggerMs}ms`}
+>
   <div class="vhead">
     <span class="platform">{entry.platform}</span>
     <span class="creator">{entry.creator}</span>
@@ -87,7 +110,13 @@
 
   <div class="vembed" bind:this={embedEl}>
     {#if inView}
-      {#if isTube && yt}
+      {#if embedDead}
+        <!-- Blank/failed embed: glitch-cone fallback, whole box opens the video. -->
+        <a class="dead" href={entry.url} target="_blank" rel="noopener noreferrer">
+          <GlitchCone />
+          <span>Preview didn't load — tap to watch on {entry.platform} ↗</span>
+        </a>
+      {:else if isTube && yt}
         <iframe
           title="{entry.creator} — application video"
           src="https://www.youtube-nocookie.com/embed/{yt}"
@@ -95,6 +124,8 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           frameborder="0"
+          onload={() => (frameLoaded = true)}
+          onerror={() => (embedDead = true)}
         ></iframe>
       {:else if isTube}
         <a class="fallback" href={entry.url} target="_blank" rel="noopener noreferrer">
@@ -107,9 +138,11 @@
           loading="lazy"
           allowfullscreen
           frameborder="0"
+          onload={() => (frameLoaded = true)}
+          onerror={() => (embedDead = true)}
         ></iframe>
-      {:else if embedDead}
-        <!-- Platform script never rendered: glitch-cone fallback, whole box opens the video. -->
+      {:else if entry.platform === "linkedin"}
+        <!-- LinkedIn has no public embed — straight to the tap-to-watch card. -->
         <a class="dead" href={entry.url} target="_blank" rel="noopener noreferrer">
           <GlitchCone />
           <span>Preview didn't load — tap to watch on {entry.platform} ↗</span>

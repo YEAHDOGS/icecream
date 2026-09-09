@@ -11,11 +11,11 @@
 >
   <!-- Opening -->
   <div
-    class="card p-4 xl:p-6 flex flex-col gap-3 md:min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 md:overflow-y-auto md:overflow-x-hidden"
+    class="card spotlight p-4 xl:p-6 flex flex-col gap-3 md:min-h-0 sm:col-span-2 md:col-span-3 xl:col-span-4 md:overflow-y-auto md:overflow-x-hidden"
   >
     <p class="eyebrow m-0">{PITCH.eyebrow}</p>
     <h2
-      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight tracking-tight text-balance"
+      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight tracking-tight text-balance gold-text"
     >
       {PITCH.headline}
     </h2>
@@ -50,7 +50,7 @@
       class="grid gap-2 grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       {#each FLAVOR_IDEAS as f (f.id)}
-        <article class="idea">
+        <article class="idea lift">
           <div class="flex items-baseline justify-between gap-2">
             <h3 class="m-0 text-sm xl:text-base font-semibold">{f.name}</h3>
             <span class="eyebrow shrink-0">{f.tag}</span>
