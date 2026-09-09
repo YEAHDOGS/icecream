@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import GlitchCone from "./GlitchCone.svelte";
   import {
     loadEmbedScript,
     processEmbeds,
@@ -14,8 +15,14 @@
   let embedEl = $state(null);
   let inView = $state(false);
   let rendered = $state(false);
+  /** The platform script gave up: show tappable fallback art, not a blank box. */
+  let embedDead = $state(false);
+  /** A real player iframe exists: hide the tap-to-open overlay so it stays usable. */
+  let embedLive = $state(false);
+  let pollTimers = [];
 
   const yt = $derived(youtubeId(entry.url));
+  const isTube = $derived(entry.platform === "youtube");
 
   onMount(() => {
     const io = new IntersectionObserver(
@@ -28,18 +35,37 @@
       { rootMargin: "500px" },
     );
     if (cardEl) io.observe(cardEl);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      pollTimers.forEach(clearTimeout);
+    };
   });
 
   // Once the card nears the viewport, load the platform script (if any) and
-  // let it render the blockquote. Runs once per card.
+  // let it render the blockquote. Runs once per card. We poll for a real
+  // player iframe afterwards — if the script never renders one, the box
+  // would stay blank, so we swap in tappable fallback art instead.
   $effect(() => {
     if (!inView || rendered || !embedEl) return;
     rendered = true;
-    if (entry.platform === "youtube") return; // iframe renders on its own
-    loadEmbedScript(entry.platform).then(() =>
-      processEmbeds(entry.platform, embedEl),
-    );
+    if (isTube) return; // iframe renders on its own
+    loadEmbedScript(entry.platform).then(() => {
+      processEmbeds(entry.platform, embedEl);
+      let tries = 0;
+      const tick = () => {
+        if (!embedEl) return;
+        if (embedEl.querySelector("iframe")) {
+          embedLive = true;
+          return;
+        }
+        if (++tries >= 5) {
+          embedDead = true;
+          return;
+        }
+        pollTimers.push(setTimeout(tick, 1500));
+      };
+      tick();
+    });
   });
 </script>
 
@@ -51,7 +77,7 @@
 
   <div class="vembed" bind:this={embedEl}>
     {#if inView}
-      {#if entry.platform === "youtube" && yt}
+      {#if isTube && yt}
         <iframe
           title="{entry.creator} — application video"
           src="https://www.youtube-nocookie.com/embed/{yt}"
@@ -60,12 +86,28 @@
           allowfullscreen
           frameborder="0"
         ></iframe>
-      {:else if entry.platform === "youtube"}
+      {:else if isTube}
         <a class="fallback" href={entry.url} target="_blank" rel="noopener noreferrer">
           Watch on YouTube ↗
         </a>
+      {:else if embedDead}
+        <!-- Platform script never rendered: glitch-cone fallback, whole box opens the video. -->
+        <a class="dead" href={entry.url} target="_blank" rel="noopener noreferrer">
+          <GlitchCone />
+          <span>Preview didn't load — tap to watch on {entry.platform} ↗</span>
+        </a>
       {:else}
         {@html blockquoteHtml(entry)}
+        {#if !embedLive}
+          <!-- Blank-but-loading box: the whole tile opens the video. -->
+          <a
+            class="vhit"
+            href={entry.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open {entry.creator}'s video on {entry.platform}"
+          ></a>
+        {/if}
       {/if}
     {:else}
       <a class="fallback" href={entry.url} target="_blank" rel="noopener noreferrer">
@@ -120,6 +162,7 @@
   }
 
   .vembed {
+    position: relative;
     min-width: 0;
     border-radius: 10px;
     overflow: hidden;
@@ -135,6 +178,32 @@
 
     :global(blockquote) {
       margin: 0 !important;
+    }
+  }
+
+  /* Invisible tap target over a blank-but-loading embed: the whole tile
+     opens the video until a real player renders. */
+  .vhit {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+  }
+
+  .dead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.4rem 1rem;
+    color: var(--ink-muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    text-decoration: none;
+    text-align: center;
+
+    &:hover {
+      color: var(--ink);
     }
   }
 
