@@ -52,7 +52,7 @@
       ),
   );
 
-  /* Pagination: 181 cards at once is a laggy wall. 24 per page keeps the
+  /* Pagination: 280 cards at once is a laggy wall. 24 per page keeps the
    * grid snappy; filters/shuffle always restart on page 1. */
   const PER_PAGE = 24;
   let page = $state(1);
