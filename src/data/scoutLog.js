@@ -22,7 +22,7 @@ export const SCOUT_LOG = [
   },
   {
     date: '2026-09-09',
-    videosFound: 10,
-    note: 'Read-only Instagram + YouTube sweep: 10 net new after URL dedupe (9 IG, 1 YT; post captions verified via post metadata). Community-visible sample, estimate.',
+    videosFound: 16,
+    note: 'Read-only Instagram sweeps: 10 net new in pass 3 after URL dedupe (9 IG, 1 YT; post captions verified via post metadata). Pass 4 used fresh angles (pitch-phrasing social search, Threads/Facebook pools) and added 6 more caption-verified IG videos; Facebook (9 genuine) and Threads (1 genuine) applicant videos found but excluded — outside the feed platform enum, flagged for a future platform-support pass. Community-visible sample, estimate.',
   },
 ]
