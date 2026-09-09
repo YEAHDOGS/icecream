@@ -6,7 +6,18 @@
 <figure class="hero m-0">
   <img src={image.src} alt={image.alt} loading="lazy" style={`aspect-ratio: ${image.ratio}`} />
   <figcaption>
-    Photo: <a href={image.creditUrl} target="_blank" rel="noopener noreferrer">{image.credit}</a>
+    {#if image.kind === "ai"}
+      Artwork: <span>{image.credit}</span>
+    {:else}
+      Photo:
+      {#if image.creditUrl}
+        <a href={image.creditUrl} target="_blank" rel="noopener noreferrer"
+          >{image.credit}</a
+        >
+      {:else}
+        <span>{image.credit}</span>
+      {/if}
+    {/if}
   </figcaption>
 </figure>
 

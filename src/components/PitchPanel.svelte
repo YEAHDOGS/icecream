@@ -33,6 +33,7 @@
         </li>
       {/each}
     </ul>
+    <HeroImage image={TAB_IMAGES.pitchMic} />
   </div>
 
   <!-- Flavor lineup -->

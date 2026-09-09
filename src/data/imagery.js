@@ -13,8 +13,9 @@
  * @property {string} src       Bundled image URL (import it above)
  * @property {string} alt       Alt text
  * @property {string} credit    Visible credit label
- * @property {string} creditUrl Source page for the credit link
+ * @property {string} [creditUrl] Source page for the credit link (omit for AI art)
  * @property {string} ratio     CSS aspect-ratio for the crop (e.g. '16/9')
+ * @property {'photo'|'ai'} [kind] 'ai' for generated artwork (default 'photo')
  */
 
 import marketImg from '../assets/img/market.webp'
@@ -22,11 +23,13 @@ import playersImg from '../assets/img/players.webp'
 import flavorsImg from '../assets/img/flavors.webp'
 import campaignImg from '../assets/img/campaign.webp'
 import pitchImg from '../assets/img/pitch.webp'
+import fieldStageImg from '../assets/img/field-stage.webp'
+import pitchMicImg from '../assets/img/pitch-mic.webp'
 
 /** Build marker — grep the served JS bundle for this to confirm a deploy. */
-export const BUILD_TAG = 'scoop-field-tapfix'
+export const BUILD_TAG = 'scoop-more-pictures'
 
-/** @type {Record<'market'|'players'|'flavors'|'campaign'|'pitch', TabImage>} */
+/** @type {Record<'market'|'players'|'flavors'|'campaign'|'pitch'|'fieldStage'|'pitchMic', TabImage>} */
 export const TAB_IMAGES = {
   market: {
     src: marketImg,
@@ -62,5 +65,19 @@ export const TAB_IMAGES = {
     credit: 'StockCake',
     creditUrl: 'https://stockcake.com/i/melting-ice-cream_1116303_894701',
     ratio: '16/10',
+  },
+  fieldStage: {
+    src: fieldStageImg,
+    alt: 'An ice cream cone under a spotlight on a dark stage',
+    credit: 'AI-generated for The Scoop',
+    ratio: '16/10',
+    kind: 'ai',
+  },
+  pitchMic: {
+    src: pitchMicImg,
+    alt: 'A vintage microphone beside a melting ice cream cone in a dark studio',
+    credit: 'AI-generated for The Scoop',
+    ratio: '16/10',
+    kind: 'ai',
   },
 }
