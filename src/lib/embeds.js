@@ -1,7 +1,8 @@
 /**
  * Lazy third-party social embeds. No API keys needed: YouTube and Facebook
  * render via iframes; TikTok / Instagram / X / Threads render via their
- * public blockquote embed snippets. Each platform script loads once, on
+ * public blockquote embed snippets; LinkedIn has no public embed and renders
+ * as a tap-to-watch fallback card. Each platform script loads once, on
  * demand — except Threads, whose embed.js only scans the page on load, so a
  * fresh copy is injected for every Threads card.
  */
