@@ -51,9 +51,28 @@
               .includes(query.trim().toLowerCase())),
       ),
   );
+
+  /* Pagination: 181 cards at once is a laggy wall. 24 per page keeps the
+   * grid snappy; filters/shuffle always restart on page 1. */
+  const PER_PAGE = 24;
+  let page = $state(1);
+  let scroller;
+  const totalPages = $derived(Math.max(1, Math.ceil(filtered.length / PER_PAGE)));
+  const paged = $derived(filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE));
+  function goToPage(n) {
+    page = Math.min(Math.max(1, n), totalPages);
+    scroller?.scrollTo({ top: 0 });
+  }
+  $effect(() => {
+    platform;
+    tag;
+    query;
+    order;
+    page = 1;
+  });
 </script>
 
-<section class="h-full min-h-0 scroll-y">
+<section class="h-full min-h-0 scroll-y" bind:this={scroller}>
   <div class="mx-auto max-w-[1400px] flex flex-col gap-2 md:gap-3 pb-4">
     <!-- Header -->
     <div class="card p-3 xl:p-4 flex flex-col gap-2">
@@ -152,10 +171,32 @@
     <!-- Feed -->
     {#if filtered.length}
       <div class="grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
-        {#each filtered as a (a.id)}
+        {#each paged as a (a.id)}
           <VideoCard entry={a} />
         {/each}
       </div>
+      {#if totalPages > 1}
+        <nav class="pager" aria-label="Applicant video pages">
+          <button
+            type="button"
+            class="chip pager-btn"
+            disabled={page === 1}
+            onclick={() => goToPage(page - 1)}>← Prev</button
+          >
+          <span class="pager-info">
+            Page {page} of {totalPages} · {(page - 1) * PER_PAGE + 1}–{Math.min(
+              page * PER_PAGE,
+              filtered.length,
+            )} of {filtered.length}
+          </span>
+          <button
+            type="button"
+            class="chip pager-btn"
+            disabled={page === totalPages}
+            onclick={() => goToPage(page + 1)}>Next →</button
+          >
+        </nav>
+      {/if}
     {:else}
       <div class="card p-6 text-center">
         <p class="m-0 text-sm text-ink-2">
@@ -267,5 +308,24 @@
     font-size: inherit;
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  .pager-info {
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .pager-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
   }
 </style>
