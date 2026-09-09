@@ -5,6 +5,7 @@
     loadEmbedScript,
     processEmbeds,
     youtubeId,
+    facebookEmbedSrc,
     blockquoteHtml,
   } from "../lib/embeds.js";
 
@@ -23,6 +24,8 @@
 
   const yt = $derived(youtubeId(entry.url));
   const isTube = $derived(entry.platform === "youtube");
+  const isFb = $derived(entry.platform === "facebook");
+  const fbSrc = $derived(isFb ? facebookEmbedSrc(entry.url) : null);
 
   onMount(() => {
     const io = new IntersectionObserver(
@@ -45,10 +48,11 @@
   // let it render the blockquote. Runs once per card. We poll for a real
   // player iframe afterwards — if the script never renders one, the box
   // would stay blank, so we swap in tappable fallback art instead.
+  // (YouTube and Facebook render iframes directly, so they skip this.)
   $effect(() => {
     if (!inView || rendered || !embedEl) return;
     rendered = true;
-    if (isTube) return; // iframe renders on its own
+    if (isTube || isFb) return; // iframe renders on its own
     loadEmbedScript(entry.platform).then(() => {
       processEmbeds(entry.platform, embedEl);
       let tries = 0;
@@ -90,6 +94,14 @@
         <a class="fallback" href={entry.url} target="_blank" rel="noopener noreferrer">
           Watch on YouTube ↗
         </a>
+      {:else if isFb}
+        <iframe
+          title="{entry.creator} — application video"
+          src={fbSrc}
+          loading="lazy"
+          allowfullscreen
+          frameborder="0"
+        ></iframe>
       {:else if embedDead}
         <!-- Platform script never rendered: glitch-cone fallback, whole box opens the video. -->
         <a class="dead" href={entry.url} target="_blank" rel="noopener noreferrer">

@@ -8,7 +8,7 @@
   const ISSUE_URL =
     "https://github.com/YEAHDOGS/icecream/issues/new?template=applicant-video.yml";
 
-  const PLATFORMS = ["all", "youtube", "tiktok", "instagram", "x"];
+  const PLATFORMS = ["all", "youtube", "tiktok", "instagram", "x", "facebook", "threads"];
   const ALL_TAGS = ["all", ...new Set(APPLICANTS.flatMap((a) => a.tags))];
 
   const latestScout = SCOUT_LOG[SCOUT_LOG.length - 1];
