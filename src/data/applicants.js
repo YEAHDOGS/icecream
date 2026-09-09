@@ -2329,7 +2329,7 @@ export const APPLICANTS = [
   {
     id: 'dahemphill-international-audition',
     platform: 'youtube',
-    url: 'https://www.youtube.com/shorts/Pa72LaerJJLo',
+    url: 'https://www.youtube.com/shorts/P72LaerJJLo',
     creator: 'dahemphill',
     note: 'Snoop Dogg audition - international ice cream tester #tastetest',
     dateAdded: 'Sep 9, 2026',
