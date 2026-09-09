@@ -18,7 +18,7 @@
  * @property {string[]} tags    From: funny, heartfelt, business-pitch, musical, wildcard, taste-test, cinematic
  */
 
-export const LAST_UPDATED = 'Sep 8, 2026'
+export const LAST_UPDATED = 'Sep 9, 2026'
 
 /** @type {Applicant[]} */
 export const APPLICANTS = [
@@ -1650,5 +1650,95 @@ export const APPLICANTS = [
     note: '"$10k a month to taste."',
     dateAdded: 'Sep 8, 2026',
     tags: ['wildcard'],
+  },
+  {
+    id: 'bigkahu-drop-it-like-its-cold',
+    platform: 'youtube',
+    url: 'https://www.youtube.com/shorts/h_mLtMuqnwk',
+    creator: 'BigKahu',
+    note: 'Original music track "Drop it like its Cold" pitched for the role under the #snoopishiring banner.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['musical', 'wildcard'],
+  },
+  {
+    id: 'jannice-lifewithjannice',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/Dc84rQ-igRG/',
+    creator: 'Jannice (@lifewithjannice)',
+    note: 'Philadelphia food-and-beverage pro and former restaurant owner who resigned to chase the taster job; applies passport in hand.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['business-pitch', 'taste-test'],
+  },
+  {
+    id: 'lizzy-ashliegh',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DculCWrBYjm/',
+    creator: 'Lizzy Ashliegh (@lizzyashmusic)',
+    note: 'Staged "I\u2019m hired" victory lap with a Deel taster badge and flavor-research travel plans: South Africa, Dubai, Japan.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['wildcard', 'cinematic'],
+  },
+  {
+    id: 'pao-cortes',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/Dc2TuH7IlEN/',
+    creator: 'Pao Cortes (@itspaocortes)',
+    note: 'Mock job application leaning into being a picky eater, pitching a "concha de chocolate" flavor from Mexican sweet bread.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['funny', 'business-pitch'],
+  },
+  {
+    id: 'alexis-dean-lex',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DcrLUoDpTb7/',
+    creator: 'Alexis Dean Jr. / L.E.X (@1lexdateacher)',
+    note: 'Milwaukee teacher and hip-hop artist L.E.X performs an original song while tasting four Dr. Bombay pints stacked in a pyramid.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['musical', 'taste-test'],
+  },
+  {
+    id: 'megsy-warhol',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DdB7BuFxmiY/',
+    creator: 'Megsy Warhol (@megsywarhol)',
+    note: 'Artist "Skittles" builds her video application around a caramel-apple float and restaurant dessert-prep experience.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['wildcard', 'taste-test'],
+  },
+  {
+    id: 'jelena-cvijic',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/Dc800rZMdha/',
+    creator: 'Jelena Cviji\u0107 (@jcvijic)',
+    note: 'Zagreb artist applies in a Snoop t-shirt, tasting freeze-dried astronaut ice cream from her packed freezer.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['funny', 'wildcard'],
+  },
+  {
+    id: 'cheryl-chapman-agent-scoop',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DdBDOilCi30/',
+    creator: 'Cheryl L Chapman (@cheryl.chapman.theplan)',
+    note: 'UK "Agent Scoop" stages a flavor-research mission and pitches a secret-recipe organic broccoli ice cream.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['funny', 'cinematic'],
+  },
+  {
+    id: 'anaa-lee',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DcoxjWmyTfq/',
+    creator: 'Anaa Lee (@dami.anaaa)',
+    note: 'NYC creator\u2019s urgent pitch \u2014 "I need this job & I need it now" \u2014 with her invented banana-pudding cheesecake crunch flavor.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['funny', 'taste-test'],
+  },
+  {
+    id: 'roshan-gidwani',
+    platform: 'instagram',
+    url: 'https://www.instagram.com/reel/DcqlxY5KzZq/',
+    creator: 'Roshan Gidwani (@roshtotheg)',
+    note: 'Self-styled "Globetrotter Master" pitches himself as a flavor-tasting chauffeur, tagged #SNOOPISHIRING and #deeljobs.',
+    dateAdded: 'Sep 9, 2026',
+    tags: ['business-pitch', 'wildcard'],
   },
 ]

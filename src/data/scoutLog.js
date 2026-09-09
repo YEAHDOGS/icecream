@@ -20,4 +20,9 @@ export const SCOUT_LOG = [
     videosFound: 169,
     note: 'First sweep + two TikTok #snoopishiring passes (108 net new in pass 2 after URL dedupe; caption-verified): 169 new verified videos total; X blocked by login wall. TikTok shows no public hashtag video count. Community-visible sample, estimate.',
   },
+  {
+    date: '2026-09-09',
+    videosFound: 10,
+    note: 'Read-only Instagram + YouTube sweep: 10 net new after URL dedupe (9 IG, 1 YT; post captions verified via post metadata). Community-visible sample, estimate.',
+  },
 ]

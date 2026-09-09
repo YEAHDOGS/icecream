@@ -27,7 +27,7 @@ import fieldStageImg from '../assets/img/field-stage.webp'
 import pitchMicImg from '../assets/img/pitch-mic.webp'
 
 /** Build marker — grep the served JS bundle for this to confirm a deploy. */
-export const BUILD_TAG = 'scoop-field-pages'
+export const BUILD_TAG = 'scoop-scout3'
 
 /** @type {Record<'market'|'players'|'flavors'|'campaign'|'pitch'|'fieldStage'|'pitchMic', TabImage>} */
 export const TAB_IMAGES = {
