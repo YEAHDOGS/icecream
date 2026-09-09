@@ -22,7 +22,7 @@ export const SCOUT_LOG = [
   },
   {
     date: '2026-09-09',
-    videosFound: 59,
-    note: 'Read-only Instagram sweeps: 10 net new in pass 3 after URL dedupe (9 IG, 1 YT; post captions verified via post metadata). Pass 4 used fresh angles (pitch-phrasing social search, Threads/Facebook pools) and added 6 more caption-verified IG videos. Blitz pass 5 added 43 net new after URL dedupe (41 Facebook reels, 2 Threads) via read-only Facebook/Threads sweeps with full caption summaries; excluded 7 likely cross-posts already in the feed (Christina Johnson, Levi Hunt, Lizzy Ashliegh, Alexis Dean Jr., Lauryn Jarrell, Venus duplicate, Dakota Covil duplicate reel) plus promos/news/reviews. Community-visible sample, estimate.',
+    videosFound: 62,
+    note: 'Read-only Instagram sweeps: 10 net new in pass 3 after URL dedupe (9 IG, 1 YT; post captions verified via post metadata). Pass 4 used fresh angles (pitch-phrasing social search, Threads/Facebook pools) and added 6 more caption-verified IG videos. Blitz pass 5 added 43 net new after URL dedupe (41 Facebook reels, 2 Threads) via read-only Facebook/Threads sweeps with full caption summaries; excluded 7 likely cross-posts already in the feed (Christina Johnson, Levi Hunt, Lizzy Ashliegh, Alexis Dean Jr., Lauryn Jarrell, Venus duplicate, Dakota Covil duplicate reel) plus promos/news/reviews. Blitz pass 6 added 3 net new (3 LinkedIn native video pitches, transcript-verified: Martina Ascone, Colin R. Mah, Sir Michael Gill-Branion); Facebook/YouTube/TikTok/IG/X/Threads re-sweeps found nothing new beyond dupes — those pools need live-browser or logged-in sessions to go deeper. Community-visible sample, estimate.',
   },
 ]
