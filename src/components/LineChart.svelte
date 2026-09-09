@@ -103,6 +103,8 @@
   .plot {
     display: block;
     width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
     height: auto;
   }
 

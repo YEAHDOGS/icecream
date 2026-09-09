@@ -30,24 +30,18 @@
 <section
   class="h-full min-h-0 grid gap-2 md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 scroll-y md:overflow-hidden md:grid-rows-[auto_minmax(0,1fr)]"
 >
-  <!-- Taste the homework: one-click retail -->
+  <!-- Taste the homework: slim retail strip -->
   <div
-    class="card spotlight p-3 xl:p-4 flex flex-col sm:flex-row gap-3 sm:items-center md:min-h-0 sm:col-span-2 md:col-span-3"
+    class="card spotlight px-3 py-2 flex flex-wrap items-center gap-x-3 gap-y-2 sm:col-span-2 md:col-span-3"
   >
-    <div class="sm:w-60 lg:w-72 shrink-0 min-w-0">
+    <div class="w-14 sm:w-16 shrink-0 min-w-0">
       <HeroImage image={TAB_IMAGES.flavors} />
     </div>
-    <div class="flex flex-col gap-2 min-w-0">
-      <p class="eyebrow m-0">Taste the homework</p>
-      <p class="m-0 text-xl xl:text-2xl font-bold tracking-tight text-balance">
-        <span class="gold-text">Research is better with a spoon in it.</span>
-      </p>
-      <p class="m-0 text-[0.74rem] leading-snug text-ink-2">
-        The full Dr. Bombay lineup — the pints behind every trend call on this
-        tab.
-      </p>
-      <BuyButtons />
-    </div>
+    <p class="m-0 text-[0.74rem] font-semibold tracking-tight text-balance flex-1 min-w-0 basis-40">
+      <span class="gold-text">Research is better with a spoon in it.</span>
+      <span class="text-ink-2 font-normal"> Taste the full Dr. Bombay lineup.</span>
+    </p>
+    <BuyButtons />
   </div>
 
   <!-- Main column: the role, the momentum, the flavors -->
@@ -65,9 +59,8 @@
         campaign-reported estimates, not audited numbers.
       </p>
     </div>
-    <HeroImage image={TAB_IMAGES.campaign} />
     <div
-      class="flex flex-col gap-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
+      class="flex flex-col gap-2 md:gap-3 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain pr-0.5"
     >
       <div class="grid gap-2 grid-cols-1 sm:grid-cols-2">
         {#each CAMPAIGN_STATS as s (s.id)}
@@ -86,7 +79,11 @@
       </div>
 
       <div class="card-inner">
-        <p class="eyebrow m-0 mb-1">Know your competition</p>
+        <p class="eyebrow m-0 mb-1">Applicant videos by platform</p>
+        <PieChart />
+      </div>
+
+      <Disclosure title="Know your competition">
         <p class="m-0 mb-2 text-[0.7rem] text-muted">
           Measured counts, labeled estimates, and one honest unknown — as of
           {LAST_UPDATED}.
@@ -96,15 +93,13 @@
             <Stat stat={s} />
           {/each}
         </div>
-      </div>
+        <p class="m-0 mt-2 text-[0.68rem] leading-snug text-muted">
+          Deel hasn't published platform, demographic, or country splits. If
+          they do, they'll land here.
+        </p>
+      </Disclosure>
 
-      <div class="card-inner">
-        <p class="eyebrow m-0 mb-2">Applicant videos by platform</p>
-        <PieChart />
-      </div>
-
-      <div class="card-inner">
-        <p class="eyebrow m-0 mb-1">What they actually filter for</p>
+      <Disclosure title="What they actually filter for">
         <ul class="m-0 p-0 list-none flex flex-col gap-1.5">
           {#each WHAT_THEY_WANT as w (w.id)}
             <li class="text-[0.72rem] leading-snug text-ink-2">
@@ -113,15 +108,9 @@
             </li>
           {/each}
         </ul>
-      </div>
+      </Disclosure>
 
-      <p class="m-0 text-[0.68rem] leading-snug text-muted">
-        Deel hasn't published platform, demographic, or country splits. If they
-        do, they'll land here.
-      </p>
-
-      <div class="card-inner">
-        <p class="eyebrow m-0 mb-1">Trending now</p>
+      <Disclosure title="Trending now">
         <p class="m-0 mb-2 text-[0.7rem] text-muted">
           Flavors with momentum, and the evidence
         </p>
@@ -137,10 +126,9 @@
             </article>
           {/each}
         </div>
-      </div>
+      </Disclosure>
 
-      <div class="card-inner">
-        <p class="eyebrow m-0 mb-2">Regional palates</p>
+      <Disclosure title="Regional palates">
         <div class="flex flex-wrap gap-1 mb-2">
           {#each PALATES as c (c.code)}
             <button
@@ -162,10 +150,9 @@
           {/if}
           <div class="mt-1.5"><Cite source={current.source} compact /></div>
         {/if}
-      </div>
+      </Disclosure>
 
-      <div class="card-inner">
-        <p class="eyebrow m-0 mb-2">Open lanes</p>
+      <Disclosure title="Open lanes">
         <div class="flex flex-col gap-1.5">
           {#each GAPS as g, i (g.id)}
             <Disclosure title={g.name} open={i === 0}>
@@ -174,7 +161,7 @@
             </Disclosure>
           {/each}
         </div>
-      </div>
+      </Disclosure>
     </div>
   </div>
 
@@ -213,9 +200,8 @@
       </ul>
     </div>
 
-    <div class="card p-3 xl:p-4 flex flex-col gap-2 md:min-h-0 md:flex-1 md:overflow-hidden">
-      <p class="eyebrow m-0">Press &amp; milestones</p>
-      <ol class="m-0 p-0 list-none flex flex-col gap-1.5 md:min-h-0 overflow-y-auto overflow-x-hidden max-md:overflow-visible overscroll-contain">
+    <Disclosure title="Press & milestones">
+      <ol class="m-0 p-0 list-none flex flex-col gap-1.5">
         {#each CAMPAIGN_TIMELINE as t (t.date)}
           <li class="grid grid-cols-[5.5rem_1fr] gap-2 text-[0.72rem] leading-snug">
             <span class="font-semibold text-accent-bright tabular-nums">{t.date}</span>
@@ -227,7 +213,7 @@
           </li>
         {/each}
       </ol>
-    </div>
+    </Disclosure>
   </div>
 </section>
 
