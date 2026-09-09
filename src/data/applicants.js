@@ -10,7 +10,7 @@
  *
  * @typedef {Object} Applicant
  * @property {string} id        Unique key
- * @property {'youtube'|'tiktok'|'instagram'|'x'} platform
+ * @property {'youtube'|'tiktok'|'instagram'|'x'|'facebook'|'threads'} platform
  * @property {string} url       Direct https link to the video/post
  * @property {string} creator   Display name / handle
  * @property {string} note      One-line description of the pitch angle
