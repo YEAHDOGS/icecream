@@ -24,12 +24,13 @@ npm run check-links  # HEAD-checks every cited URL (run locally before publishin
 src/
   App.svelte              shell: header, tab nav, swipe + hash routing
   components/
-    WorldMap.svelte       choropleth (adapted from wearedogs)
+    JobPanel.svelte       the campaign: role facts, timeline, apply links
     MarketPanel.svelte    map + global stats + country card
-    PlayersPanel.svelte   giants, challengers, Ben & Jerry's arc, deal comps
-    FlavorsPanel.svelte   trends, regional palates, open lanes
+    ApplicantsPanel.svelte  The Field: applicant video feed (randomized, paginated)
     PitchPanel.svelte     the application, flavor lineup, brand + job facts
-    Stat / Cite / BarChart / TabNav
+    WorldMap.svelte       choropleth (adapted from wearedogs)
+    Stat / Cite / BarChart / LineChart / DonutChart / PieChart / TabNav
+    VideoCard / HeroImage / Countdown / GlitchCone / Disclosure / BuyButtons
   data/                   all content; every entry cites a Source {label,url,date}
   styles/variables.scss   every color on the site
 ```
