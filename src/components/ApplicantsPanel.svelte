@@ -1,6 +1,8 @@
 <script>
   import VideoCard from "./VideoCard.svelte";
+  import HeroImage from "./HeroImage.svelte";
   import { APPLICANTS, LAST_UPDATED } from "../data/applicants.js";
+  import { TAB_IMAGES } from "../data/imagery.js";
   import { SCOUT_LOG } from "../data/scoutLog.js";
 
   const ISSUE_URL =
@@ -66,6 +68,7 @@
           applicant gets the same stage. Nobody is ranked, scored, or boosted.
         </p>
       </div>
+      <HeroImage image={TAB_IMAGES.fieldStage} />
       <!-- Scouting log: daily discovery stats, always labeled estimates -->
       <div class="scout">
         <div class="flex items-baseline justify-between gap-2">
