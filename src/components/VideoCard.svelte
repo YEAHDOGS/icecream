@@ -48,11 +48,17 @@
   // let it render the blockquote. Runs once per card. We poll for a real
   // player iframe afterwards — if the script never renders one, the box
   // would stay blank, so we swap in tappable fallback art instead.
-  // (YouTube and Facebook render iframes directly, so they skip this.)
+  // (YouTube and Facebook render iframes directly, so they skip this.
+  // LinkedIn has no public embed — it goes straight to the tap-to-watch
+  // fallback card.)
   $effect(() => {
     if (!inView || rendered || !embedEl) return;
     rendered = true;
     if (isTube || isFb) return; // iframe renders on its own
+    if (entry.platform === "linkedin") {
+      embedDead = true;
+      return;
+    }
     loadEmbedScript(entry.platform).then(() => {
       processEmbeds(entry.platform, embedEl);
       let tries = 0;
