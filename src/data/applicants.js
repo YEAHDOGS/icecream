@@ -18,7 +18,7 @@
  * @property {string[]} tags    From: funny, heartfelt, business-pitch, musical, wildcard, taste-test, cinematic
  */
 
-export const LAST_UPDATED = 'Sep 9, 2026'
+export const LAST_UPDATED = 'Sep 10, 2026'
 
 /** @type {Applicant[]} */
 export const APPLICANTS = [
@@ -3891,5 +3891,23 @@ export const APPLICANTS = [
     note: 'Application video for the Snoop Dogg x Deel x Dr. Bombay ice cream taste tester role, caption-verified in the logged-in #icecreamtester sweep.',
     dateAdded: 'Sep 9, 2026',
     tags: ['wildcard'],
+  },
+  {
+    id: 'mateo-eaton-linkedin',
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/posts/mateoeaton_snoopishiring-activity-7503667662158364672-jtyn',
+    creator: 'Mateo Eaton',
+    note: 'Transcript-verified video pitch: multilingual branded-content producer lays out a six-stage plan to find the world\'s favorite flavors and make America obsessed with Dr. Bombay.',
+    dateAdded: 'Sep 10, 2026',
+    tags: ['business-pitch', 'wildcard'],
+  },
+  {
+    id: 'serena-g-linkedin',
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/posts/serenaguedia_snoopishiring-activity-7502682352809263104-Y_84',
+    creator: 'Serena G.',
+    note: 'Unconventional application video with kick-started market research: four food-for-thought pairings (saffron risotto × pistachio, pretzel × candied almond, croissant × stracciatella, rye bread × coconut marshmallow).',
+    dateAdded: 'Sep 10, 2026',
+    tags: ['business-pitch', 'taste-test'],
   },
 ]

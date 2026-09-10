@@ -27,7 +27,7 @@ export const SCOUT_LOG = [
   },
   {
     date: '2026-09-10',
-    videosFound: 0,
-    note: 'Fresh-angle web-search sweep across all 7 pools (site: filters, hire-me phrasing, flavor-pitch angles, ES queries, creator/audition phrasing, X/TikTok pool queries): 0 new verified — discoverable pools remain saturated via web search; the only application-video hit (Snoopi Botten, YouTube) was already in the feed. Community-visible sample, estimate.',
+    videosFound: 2,
+    note: 'Fresh-angle web-search sweep across all 7 pools (site: filters, hire-me phrasing, flavor-pitch angles, ES queries, creator/audition phrasing, X/TikTok pool queries, day-series phrasing): 0 new verified in the first wave — discoverable pools remain saturated via web search; the only application-video hit (Snoopi Botten, YouTube) was already in the feed. LinkedIn #snoopishiring pass added 2 net new after URL dedupe (2 LinkedIn native video pitches, transcript/caption-verified: Mateo Eaton, Serena G.). Community-visible sample, estimate.',
   },
 ]
