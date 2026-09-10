@@ -76,13 +76,13 @@
           {SUBTITLE}
         </p>
       </div>
-      <!-- the founder's own sites: permanent, visible on launch, every tab. -->
-      <nav class="brand-links" aria-label="the founder's sites">
+      <!-- DOGS network sites: permanent, visible on launch, every tab. -->
+      <nav class="brand-links" aria-label="DOGS network sites">
         <a
           href="https://captainbrando.com"
           target="_blank"
           rel="noopener noreferrer"
-          title="the founder — the founder's music career"
+          title="the founder"
         >
           <img src={brandoIcon} alt="the founder logo" />
           <span>the founder</span>
@@ -91,7 +91,7 @@
           href="https://wearedogs.net"
           target="_blank"
           rel="noopener noreferrer"
-          title="DOGS — the founder's tech company"
+          title="DOGS"
         >
           <img src={dogsIcon} alt="DOGS logo" />
           <span>DOGS</span>
