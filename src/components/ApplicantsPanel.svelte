@@ -12,7 +12,6 @@
   const ALL_TAGS = ["all", ...new Set(APPLICANTS.flatMap((a) => a.tags))];
 
   const latestScout = SCOUT_LOG[SCOUT_LOG.length - 1];
-  const totalScouted = SCOUT_LOG.reduce((n, e) => n + e.videosFound, 0);
   let showLogHistory = $state(false);
 
   /** '2026-09-08' -> 'Sep 8' */
@@ -82,8 +81,7 @@
           Applicant videos, scouted from across social media
         </p>
         <p class="m-0 mt-1 text-[0.72rem] leading-snug text-ink-2">
-          <span class="gold-text font-bold text-sm tabular-nums">{APPLICANTS.length}</span>
-          videos · updated {LAST_UPDATED} · shown in
+          Applicant videos · updated {LAST_UPDATED} · shown in
           <span class="font-semibold text-ink">random order</span> — every
           applicant gets the same stage. Nobody is ranked, scored, or boosted.
         </p>
@@ -105,12 +103,8 @@
           {/if}
         </div>
         <p class="m-0 mt-0.5 text-[0.72rem] text-ink-2">
-          <span class="font-bold text-accent-bright text-sm tabular-nums"
-            >{latestScout.videosFound}</span
-          >
-          applicant videos verified {shortDate(latestScout.date)}
+          Applicant videos verified {shortDate(latestScout.date)}
           <span class="text-muted">· community-visible sample, estimate</span>
-          <span class="text-muted">· {totalScouted} scouted to date</span>
         </p>
         {#if showLogHistory}
           <ul class="m-0 mt-1 p-0 list-none flex flex-col gap-1">
@@ -120,7 +114,7 @@
                   >{shortDate(e.date)}</span
                 >
                 <span class="text-ink-2">
-                  {e.videosFound} verified · {e.note}
+                  Verified · {e.note}
                 </span>
               </li>
             {/each}

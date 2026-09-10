@@ -63,22 +63,21 @@
           transform="rotate(-90 70 70)"
         />
       {/each}
-      <text x="70" y="66" text-anchor="middle" class="pie-num">{total}</text>
-      <text x="70" y="84" text-anchor="middle" class="pie-cap">researched</text>
+      <text x="70" y="76" text-anchor="middle" class="pie-cap">researched</text>
     </svg>
     <ul class="m-0 p-0 list-none legend">
       {#each slices as s, i}
         <li>
           <span class="dot" style="background: {TINTS[i % TINTS.length]}"></span>
           <span class="pname">{s.platform}</span>
-          <span class="pnum">{s.count} · {Math.round(s.frac * 100)}%</span>
+          <span class="pnum">{Math.round(s.frac * 100)}%</span>
         </li>
       {/each}
     </ul>
   </div>
 {/if}
 <p class="m-0 mt-2 text-[0.66rem] leading-snug text-muted">
-  Applicants researched (n={total}) — community-visible sample, not Deel's
+  Applicants researched — community-visible sample, not Deel's
   full applicant data.
 </p>
 
