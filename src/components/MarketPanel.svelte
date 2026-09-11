@@ -20,6 +20,7 @@
     CELEBRITY_COMPS,
     ARC,
   } from "../data/competitors.js";
+  import { VIDEO_BRIEF } from "../data/brief.js";
 
   const TOP_MARKETS_COUNT = 6;
 
@@ -83,6 +84,28 @@
 </script>
 
 <section class="market">
+  <!-- Video brief: the founder's on-camera cheat sheet, pinned first -->
+  <div class="brief-card card p-3 xl:p-4">
+    <div class="flex items-baseline justify-between gap-2">
+      <p class="eyebrow m-0">{VIDEO_BRIEF.title}</p>
+      <p class="m-0 text-[0.6rem] text-muted">{VIDEO_BRIEF.subtitle}</p>
+    </div>
+    <div class="brief-facts mt-2">
+      {#each VIDEO_BRIEF.facts as f (f.id)}
+        <div class="brief-fact">
+          <p class="m-0 text-lg xl:text-xl font-semibold text-accent-bright">
+            {f.value}
+          </p>
+          <p class="m-0 text-[0.72rem] leading-snug text-ink-2">{f.label}</p>
+          {#if f.note}
+            <p class="m-0 text-[0.62rem] leading-snug text-muted">{f.note}</p>
+          {/if}
+          <div class="mt-1"><Cite source={f.source} compact /></div>
+        </div>
+      {/each}
+    </div>
+  </div>
+
   <!-- Rail: hero + charted market figures -->
   <aside class="rail">
     <div class="hero-slot"><Stat stat={hero} hero /></div>
@@ -259,9 +282,32 @@
     height: 100%;
     min-height: 0;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "map" "rail" "detail";
+    grid-template-areas: "brief" "map" "rail" "detail";
     overflow-y: auto;
     overflow-x: hidden;
+  }
+
+  .brief-card {
+    grid-area: brief;
+    min-width: 0;
+  }
+
+  .brief-facts {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+
+  .brief-fact {
+    min-width: 0;
+  }
+
+  // Landscape phones and small tablets: two-up brief facts
+  @media (min-width: 640px) {
+    .brief-facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .map-card {
@@ -336,9 +382,15 @@
   @media (min-width: 1024px) {
     .market {
       grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
-      grid-template-rows: minmax(0, 1fr);
-      grid-template-areas: "rail map detail";
+      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-areas:
+        "brief brief brief"
+        "rail map detail";
       overflow: hidden;
+    }
+
+    .brief-facts {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .map-card {
