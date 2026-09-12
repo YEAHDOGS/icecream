@@ -49,7 +49,14 @@ The app is an `h-dvh` fixed shell (`App.svelte`) with `overflow: hidden` on
   `$effect` scrolls the active tab into view.
 - Verifying layout: `/opt/meta-chromium/chrome` exists (no download needed).
   Serve `dist/` under the `/icecream/` base path and drive it with Python
-  Playwright via `executable_path`. Overlap check: compare `.card` bounding
+  Playwright via `executable_path`. **Sandbox caveat (Sep 12, 2026):**
+  localhost top-level navigations are blocked by
+  `ERR_BLOCKED_BY_LOCAL_NETWORK_ACCESS_CHECKS` (the egress proxy makes
+  Chromium treat loopback as untrusted); `--no-proxy-server` and the
+  LocalNetworkAccess/BlockInsecurePrivateNetworkRequests feature flags did
+  not clear it. Do not burn time on local Playwright — verify against the
+  live deploy (`https://icecream.wearedogs.net`, check the JS bundle for
+  the current `BUILD_TAG`) or find a non-loopback route. Overlap check: compare `.card` bounding
   boxes, skipping ancestor/descendant pairs.
 - Desktop dashboard locks at `md` (Players/Flavors/Pitch/Campaign/Field) and at
   `lg` (Market). Sections that lock at `md` need explicit
