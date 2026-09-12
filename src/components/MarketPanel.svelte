@@ -375,7 +375,7 @@
     height: 100%;
     min-height: 0;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "brief" "map" "rail" "detail";
+    grid-template-areas: "map" "brief" "rail" "detail";
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -489,8 +489,9 @@
       grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
       grid-template-rows: auto;
       grid-template-areas:
+        "map map map"
         "brief brief brief"
-        "rail map detail";
+        "rail rail detail";
       overflow-y: auto;
       overflow-x: hidden;
       align-content: start;
