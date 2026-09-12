@@ -3,6 +3,7 @@
   import Stat from "./Stat.svelte";
   import BarChart from "./BarChart.svelte";
   import DonutChart from "./DonutChart.svelte";
+  import LineChart from "./LineChart.svelte";
   import Cite from "./Cite.svelte";
   import HeroImage from "./HeroImage.svelte";
   import { TAB_IMAGES } from "../data/imagery.js";
@@ -11,6 +12,7 @@
     SEGMENTS,
     MARKET_SCALE,
     US_FLAVOR_SHARE,
+    CHINA_FLAVOR_RANK,
   } from "../data/market.js";
   import { COUNTRIES, DEFAULT_COUNTRY } from "../data/countries.js";
   import { PALATES } from "../data/trends.js";
@@ -27,7 +29,56 @@
   let selected = $state(DEFAULT_COUNTRY);
   const country = $derived(COUNTRIES.find((c) => c.code === selected));
   const palate = $derived(PALATES.find((p) => p.code === selected));
-  const [hero, ...stats] = GLOBAL_STATS;
+  const stats = GLOBAL_STATS.slice(1);
+
+  // The 60-second video brief, folded into the hero as the cheat sheet.
+  // Giant cards carry the three crucial market sizes; the rest stay compact.
+  const briefFact = Object.fromEntries(VIDEO_BRIEF.facts.map((f) => [f.id, f]));
+  const china = COUNTRIES.find((c) => c.code === "cn");
+  const heroCards = [
+    {
+      // $24.1B pairs the GVR country figure with the Mintel #1-market fact.
+      stat: {
+        ...briefFact["china-number-one"],
+        value: china.value,
+        label: "China — the largest ice cream market on Earth",
+        note: "Overtook the US in 2014 and never looked back.",
+      },
+      sources: [briefFact["china-number-one"].source, china.source],
+    },
+    { stat: briefFact["global-market"], sources: null },
+    { stat: briefFact["us-market"], sources: null },
+  ];
+  const majorCards = ["china-brands", "global-champ", "china-flavors", "china-disruptors"].map(
+    (id) => briefFact[id],
+  );
+  const minorCards = ["global-runner-up", "blue-bell-texas", "blue-bell-search"].map(
+    (id) => briefFact[id],
+  );
+
+  // Chart data. Every figure was already cited in the data files; the donuts
+  // show the cited leaders against the rest of the market.
+  const chinaBrandSlices = [
+    { label: "Yili", frac: 0.17 },
+    { label: "Mengniu", frac: 0.1 },
+    { label: "Rest of market", frac: 0.73 },
+  ];
+  const globalShareSlices = [
+    { label: "Magnum Ice Cream Co.", frac: 0.21 },
+    { label: "Rest of market", frac: 0.79 },
+  ];
+  const chinaFlavorRows = CHINA_FLAVOR_RANK.map((s) => ({
+    label: s.label,
+    num: s.num,
+    value: s.value,
+  }));
+  const growthPoints = [
+    { label: "2025", value: "$121B", num: 121.4e9 },
+    { label: "2033", value: "$169B", num: 169e9, projection: true },
+  ];
+  const leaderShare = GLOBAL_STATS.find((s) => s.id === "leader-share");
+  // The TMICC 21% figure lives on a hero card now — keep it out of the rail.
+  const railStats = stats.filter((s) => s.id !== "leader-share");
 
   const topMarkets = [...COUNTRIES]
     .sort((a, b) => b.num - a.num)
@@ -84,31 +135,73 @@
 </script>
 
 <section class="market">
-  <!-- Video brief: the founder's on-camera cheat sheet, pinned first -->
-  <div class="brief-card card p-3 xl:p-4">
-    <div class="flex items-baseline justify-between gap-2">
+  <!-- Hero: the 60-second video brief as the cheat sheet, stats-first -->
+  <div class="brief-hero">
+    <div class="flex items-baseline justify-between gap-2 flex-wrap">
       <p class="eyebrow m-0">{VIDEO_BRIEF.title}</p>
       <p class="m-0 text-[0.6rem] text-muted">{VIDEO_BRIEF.subtitle}</p>
     </div>
-    <div class="brief-facts mt-2">
-      {#each VIDEO_BRIEF.facts as f (f.id)}
-        <div class="brief-fact">
-          <p class="m-0 text-lg xl:text-xl font-semibold text-accent-bright">
-            {f.value}
-          </p>
-          <p class="m-0 text-[0.72rem] leading-snug text-ink-2">{f.label}</p>
-          {#if f.note}
-            <p class="m-0 text-[0.62rem] leading-snug text-muted">{f.note}</p>
-          {/if}
-          <div class="mt-1"><Cite source={f.source} compact /></div>
-        </div>
+    <div class="giants">
+      {#each heroCards as h (h.stat.id)}
+        <Stat stat={h.stat} sources={h.sources} hero />
       {/each}
+    </div>
+    <div class="majors">
+      {#each majorCards as f (f.id)}
+        <Stat stat={f} />
+      {/each}
+    </div>
+    <div class="minors">
+      {#each minorCards as f (f.id)}
+        <Stat stat={f} />
+      {/each}
+    </div>
+    <p class="eyebrow m-0 pt-1">The charts</p>
+    <div class="charts">
+      <div class="card p-3 xl:p-4">
+        <DonutChart
+          title="China brand shares"
+          slices={chinaBrandSlices}
+          centerTop="17%"
+          centerBottom="Yili #1"
+          note="Yili 17%, Mengniu ~10%; Wall's leads the foreign brands. Remainder = rest of the market."
+        />
+        <div class="mt-2"><Cite source={briefFact["china-brands"].source} compact /></div>
+      </div>
+      <div class="card p-3 xl:p-4">
+        <DonutChart
+          title="Global company shares"
+          slices={globalShareSlices}
+          centerTop="21%"
+          centerBottom="Magnum Co."
+          note="The biggest ice cream company on Earth; Froneri is #2."
+        />
+        <div class="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+          <Cite source={leaderShare.source} compact />
+          <Cite source={briefFact["global-runner-up"].source} compact />
+        </div>
+      </div>
+      <div class="card p-3 xl:p-4">
+        <BarChart
+          title="China's flavors, ranked"
+          rows={chinaFlavorRows}
+          source={CHINA_FLAVOR_RANK[0].source}
+          note="Rank order only — bars show rank, not share."
+        />
+      </div>
+      <div class="card p-3 xl:p-4">
+        <LineChart
+          title="Global market growth"
+          points={growthPoints}
+          source={GLOBAL_STATS[0].source}
+          note="4.3% a year to $169B by 2033. Dashed = forecast."
+        />
+      </div>
     </div>
   </div>
 
-  <!-- Rail: hero + charted market figures -->
+  <!-- Rail: charted market figures -->
   <aside class="rail">
-    <div class="hero-slot"><Stat stat={hero} hero /></div>
     <div class="card p-3 xl:p-4">
       <BarChart
         title="Market scale, USD"
@@ -136,7 +229,7 @@
       />
     </div>
     <div class="rail-hero"><HeroImage image={TAB_IMAGES.market} /></div>
-    {#each stats as s (s.id)}
+    {#each railStats as s (s.id)}
       <Stat stat={s} />
     {/each}
   </aside>
@@ -287,27 +380,28 @@
     overflow-x: hidden;
   }
 
-  .brief-card {
+  .brief-hero {
     grid-area: brief;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .brief-facts {
+  // Stats-first hero grids: giant KPI cards, then compact fact cards,
+  // then the chart band. Single column on phones; the section scrolls.
+  .giants,
+  .majors,
+  .minors,
+  .charts {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.5rem;
     grid-template-columns: minmax(0, 1fr);
     min-width: 0;
   }
 
-  .brief-fact {
-    min-width: 0;
-  }
-
-  // Landscape phones and small tablets: two-up brief facts
-  @media (min-width: 640px) {
-    .brief-facts {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .majors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .map-card {
@@ -349,12 +443,20 @@
       min-height: 240px;
     }
 
-    .rail {
+    .giants {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .hero-slot {
-      grid-column: span 1;
+    .minors {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .charts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rail {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .detail {
@@ -378,23 +480,32 @@
     }
   }
 
-  // Landscape tablets, laptops, desktops: one screen, no page scroll
+  // Landscape tablets, laptops, desktops: three columns, and the whole
+  // section scrolls as one — the stats-first hero (10 fact cards + 4 charts)
+  // is taller than a locked dashboard row can hold, so the lg lock is off
+  // and rail/detail panes are content-sized (their inner scrollers go inert).
   @media (min-width: 1024px) {
     .market {
       grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: auto;
       grid-template-areas:
         "brief brief brief"
         "rail map detail";
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
+      align-content: start;
     }
 
-    .brief-facts {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+    .majors {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .charts {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .map-card {
-      height: auto;
+      height: 420px;
       min-height: 0;
     }
 
@@ -403,21 +514,21 @@
       grid-auto-rows: max-content;
       align-content: start;
       min-height: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: visible;
     }
 
-    // The merged column is long: it scrolls as a whole at lg, so inner
-    // cards must NOT carry their own scrollers here. Every row is implicit
-    // max-content — an explicit minmax(0,1fr) first row would collapse to 0
-    // once the tall implicit rows eat the free space.
     .detail {
       grid-template-columns: minmax(0, 1fr);
       grid-auto-rows: max-content;
       align-content: start;
       min-height: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: visible;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .map-card {
+      height: 480px;
     }
   }
 

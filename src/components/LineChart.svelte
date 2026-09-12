@@ -69,6 +69,7 @@
     {#each points as p, i (p.label)}
       {@const x = xOf(i)}
       {@const y = yOf(p)}
+      {@const anchor = i === 0 ? "start" : i === n - 1 ? "end" : "middle"}
       {#if p.projection}
         <circle cx={x} cy={y} r="4.5" class="proj-dot" />
       {:else}
@@ -77,7 +78,7 @@
       <text
         x={x}
         y={y - 9}
-        text-anchor="middle"
+        text-anchor={anchor}
         class={p.projection ? "vlabel proj" : "vlabel"}
         >{p.value}</text
       >

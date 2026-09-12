@@ -2,10 +2,11 @@
   import Cite from "./Cite.svelte";
 
   /**
-   * Stat tile: label, value, optional note, and its citation.
-   * @type {{ stat: import('../data/schema.js').Stat, hero?: boolean }}
+   * Stat tile: label, value, optional note, and its citation. Pass `sources`
+   * to render several citations (e.g. a hero card combining two figures).
+   * @type {{ stat: import('../data/schema.js').Stat, hero?: boolean, sources?: import('../data/schema.js').Source[] | null }}
    */
-  let { stat, hero = false } = $props();
+  let { stat, hero = false, sources = null } = $props();
 </script>
 
 <div class="stat card" class:hero>
@@ -14,9 +15,17 @@
   {#if stat.note}
     <p class="note">{stat.note}</p>
   {/if}
-  <div class="mt-auto pt-2">
-    <Cite source={stat.source} />
-  </div>
+  {#if sources?.length}
+    <div class="mt-auto pt-2 flex flex-wrap gap-x-2 gap-y-1">
+      {#each sources as s (s.url)}
+        <Cite source={s} compact />
+      {/each}
+    </div>
+  {:else}
+    <div class="mt-auto pt-2">
+      <Cite source={stat.source} />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">

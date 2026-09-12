@@ -148,6 +148,29 @@ export const MARKET_SCALE = [
 ]
 
 /**
+ * China's flavors as a published rank order. The nums are ordinals (8 down to
+ * 1), NOT market shares — no share figures are published for this ranking, so
+ * the chart note must say rank order only.
+ * @type {import('./schema.js').Stat[]}
+ */
+const ECHINESE_RANKING = {
+  label: 'eChineseLearning — Chinese ice cream ranking',
+  url: 'https://www.echineselearning.com/blog/chinese-ice-cream-ranking',
+  date: '2024',
+}
+
+export const CHINA_FLAVOR_RANK = [
+  { id: 'red-bean', label: 'Red bean', value: '#1', num: 8, source: ECHINESE_RANKING },
+  { id: 'mung-bean', label: 'Mung bean', value: '#2', num: 7, source: ECHINESE_RANKING },
+  { id: 'black-sesame', label: 'Black sesame', value: '#3', num: 6, source: ECHINESE_RANKING },
+  { id: 'green-tea', label: 'Green tea', value: '#4', num: 5, source: ECHINESE_RANKING },
+  { id: 'taro', label: 'Taro', value: '#5', num: 4, source: ECHINESE_RANKING },
+  { id: 'mango', label: 'Mango', value: '#6', num: 3, source: ECHINESE_RANKING },
+  { id: 'bubble-milk-tea', label: 'Bubble milk tea', value: '#7', num: 2, source: ECHINESE_RANKING },
+  { id: 'durian', label: 'Durian', value: '#8', num: 1, source: ECHINESE_RANKING },
+]
+
+/**
  * America's favorite flavors, from the IDFA / Morning Consult survey. The
  * percentages already lived in the us-love stat's note; this structures them
  * for the flavor-share bar chart.
