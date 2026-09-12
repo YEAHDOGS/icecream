@@ -1,4 +1,4 @@
-import { GLOBAL_STATS, SEGMENTS, MARKET_SCALE, US_FLAVOR_SHARE } from './market.js'
+import { GLOBAL_STATS, SEGMENTS, MARKET_SCALE, US_FLAVOR_SHARE, CHINA_FLAVOR_RANK } from './market.js'
 import { COUNTRIES } from './countries.js'
 import { GIANTS, CHALLENGERS, CELEBRITY_COMPS, ARC } from './competitors.js'
 import { TRENDING, GAPS, PALATES } from './trends.js'
@@ -20,6 +20,10 @@ export function allCitations() {
   SEGMENTS.forEach((s) => push(`market.SEGMENTS.${s.id}`, s.source))
   MARKET_SCALE.forEach((s) => push(`market.MARKET_SCALE.${s.id}`, s.source))
   US_FLAVOR_SHARE.forEach((s) => push(`market.US_FLAVOR_SHARE.${s.id}`, s.source))
+  CHINA_FLAVOR_RANK.forEach((s) => push(`market.CHINA_FLAVOR_RANK.${s.id}`, s.source))
+  // Market-tab hero card: the $24.1B country figure paired with the
+  // #1-market video-brief fact (Mintel source registered via brief.* above).
+  push('market.china-hero.value', COUNTRIES.find((c) => c.code === 'cn')?.source)
   COUNTRIES.forEach((c) => {
     push(`countries.${c.code}`, c.source)
     if (c.perCapita) push(`countries.${c.code}.perCapita`, c.perCapita.source)
