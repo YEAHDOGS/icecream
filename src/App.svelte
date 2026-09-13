@@ -5,7 +5,6 @@
   import JobPanel from "./components/JobPanel.svelte";
   import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
   import logo from "./assets/logo.svg";
-  import brandoIcon from "./assets/brand/captain-user.png";
   import dogsIcon from "./assets/brand/dogs.svg";
   import { SOURCE_COUNT } from "./data/index.js";
   import { BUILD_TAG } from "./data/imagery.js";
@@ -78,15 +77,6 @@
       </div>
       <!-- DOGS network sites: permanent, visible on launch, every tab. -->
       <nav class="brand-links" aria-label="DOGS network sites">
-        <a
-          href="https://wearedogs.net"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="the founder"
-        >
-          <img src={brandoIcon} alt="the founder logo" />
-          <span>the founder</span>
-        </a>
         <a
           href="https://wearedogs.net"
           target="_blank"
