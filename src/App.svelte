@@ -67,7 +67,7 @@
       <img src={logo} alt="" class="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9" />
       <div class="min-w-0 leading-tight">
         <h1
-          class="m-0 text-base sm:text-lg xl:text-xl 2xl:text-2xl font-bold tracking-tight truncate gold-text"
+          class="m-0 text-base sm:text-lg xl:text-xl 2xl:text-2xl font-bold tracking-tight truncate red-text"
         >
           {TITLE}
         </h1>
@@ -119,7 +119,7 @@
     color: var(--ink);
     position: relative;
 
-    // Ambient gold ambience: a soft crown glow up top, faint warmth low.
+    // Ambient red ambience: a soft crown glow up top, faint warmth low.
     // pointer-events none, fades to transparent — never touches layout.
     &::before {
       content: "";
@@ -143,7 +143,7 @@
   header {
     position: relative;
 
-    // Gold hairline under the header — the one accent, drawn thin.
+    // Red hairline under the header — the one accent, drawn thin.
     &::after {
       content: "";
       position: absolute;

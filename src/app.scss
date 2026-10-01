@@ -69,7 +69,7 @@ body {
 }
 
 // Section eyebrow label used across panels. One accent, everywhere:
-// butterscotch gold. Kickers in accent, headlines in cream, body in ink-2.
+// cherry red. Kickers in accent, headlines in cream, body in ink-2.
 .eyebrow {
   font-size: 0.65rem;
   font-weight: 600;
@@ -85,7 +85,7 @@ body {
   border-radius: 14px;
 }
 
-// Opt-in premium hover: gentle lift + gold hairline. Only on content tiles
+// Opt-in premium hover: gentle lift + red hairline. Only on content tiles
 // (video cards, trend/idea tiles) — never on structural layout cards, so the
 // fixed h-dvh grid never shifts.
 .lift {
@@ -101,9 +101,9 @@ body {
   }
 }
 
-// Display headline treatment: cream melting into butterscotch gold.
+// Display headline treatment: cream melting into cherry red.
 // One accent, everywhere — no multicolor excess.
-.gold-text {
+.red-text {
   background: linear-gradient(
     100deg,
     var(--ink) 5%,
@@ -115,7 +115,7 @@ body {
   color: transparent;
 }
 
-// Spotlight card: a soft gold ambience behind hero content. The glow is
+// Spotlight card: a soft red ambience behind hero content. The glow is
 // inset and fades to transparent, so no overflow clipping is needed.
 .spotlight {
   position: relative;

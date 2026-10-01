@@ -1,6 +1,6 @@
 <script>
   /**
-   * Generic donut chart. One hue only: slices use a gold-tint ramp so the
+   * Generic donut chart. One hue only: slices use a red-tint ramp so the
    * chart reads on dark without rainbow soup. Direct-labeled in the legend,
    * so it never relies on color alone.
    * @typedef {{ label: string, frac: number }} Slice

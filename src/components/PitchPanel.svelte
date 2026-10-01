@@ -15,7 +15,7 @@
   >
     <p class="eyebrow m-0">{PITCH.eyebrow}</p>
     <h2
-      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight tracking-tight text-balance gold-text"
+      class="m-0 text-xl sm:text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight tracking-tight text-balance red-text"
     >
       {PITCH.headline}
     </h2>

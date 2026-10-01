@@ -5,10 +5,10 @@
    * Platform mix of the applicant videos listed in The Field.
    * Computed live from applicants.js — updates automatically as entries are
    * added. This is a sample of scouted videos, NEVER Deel's applicant data.
-   * One hue only (gold tints) — no rainbow soup.
+   * One hue only (red tints) — no rainbow soup.
    */
 
-  /** Gold-tint ramp: darkest gold first, fading down. Direct-labeled anyway. */
+  /** Red-tint ramp: darkest red first, fading down. Direct-labeled anyway. */
   const TINTS = [
     "var(--accent)",
     "rgba(var(--accent-rgb), 0.62)",

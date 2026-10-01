@@ -3,7 +3,7 @@
 
   /**
    * Sparse line chart for a handful of dated, cited data points.
-   * Single gold series on dark; the final projected point renders dashed and
+   * Single red series on dark; the final projected point renders dashed and
    * muted so reported data never reads as a forecast. Nothing is interpolated
    * beyond connecting the given points — if a value is 0 it sits on the
    * baseline.

@@ -21,7 +21,7 @@
 
   <!-- scoops -->
   <g>
-    <circle cx="60" cy="52" r="24" fill="#f2b234" />
+    <circle cx="60" cy="52" r="24" fill="#e0392b" />
     <circle cx="44" cy="33" r="15" fill="#f7e8c9" />
     <circle cx="76" cy="33" r="15" fill="#e88ca0" />
     <circle cx="53" cy="45" r="4" fill="#fff" opacity="0.35" />

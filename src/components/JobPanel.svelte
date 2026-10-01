@@ -38,7 +38,7 @@
       <HeroImage image={TAB_IMAGES.flavors} />
     </div>
     <p class="m-0 text-[0.74rem] font-semibold tracking-tight text-balance flex-1 min-w-0 basis-40">
-      <span class="gold-text">Research is better with a spoon in it.</span>
+      <span class="red-text">Research is better with a spoon in it.</span>
       <span class="text-ink-2 font-normal"> Taste the full Dr. Bombay lineup.</span>
     </p>
     <BuyButtons />
@@ -51,7 +51,7 @@
     <div>
       <p class="eyebrow m-0">The campaign, at a glance</p>
       <p class="m-0 text-base xl:text-lg font-bold tracking-tight text-balance">
-        <span class="gold-text">Snoop Dogg × Deel × Dr. Bombay</span>
+        <span class="red-text">Snoop Dogg × Deel × Dr. Bombay</span>
         <span class="text-ink-2 font-semibold"> — International Ice Cream Taste Tester</span>
       </p>
       <p class="m-0 mt-1 text-[0.68rem] text-muted">
