@@ -1,36 +1,36 @@
 // Theme tokens. Every color on the site is defined here and exposed as a CSS
 // variable in app.scss — components reference var(--...) and never raw hex.
 //
-// Palette: deep-green surfaces, pale-green ink, green accent. The four
+// Palette: deep-blue surfaces, pale-blue ink, blue accent. The four
 // categorical hues were validated (OKLab CVD ΔE) against $bg-card for charts
 // that carry more than one series; single-series charts use $accent alone.
 
 // Surfaces
-$bg-app: #0a0f0b;          // page plane
-$bg-card: #131813;         // panels, chart surface
-$bg-card-hover: #1b221b;
-$border: rgba(233, 246, 236, 0.08);
-$border-strong: rgba(233, 246, 236, 0.16);
+$bg-app: #0a0d12;          // page plane
+$bg-card: #12161d;         // panels, chart surface
+$bg-card-hover: #1a2029;
+$border: rgba(233, 242, 250, 0.08);
+$border-strong: rgba(233, 242, 250, 0.16);
 
 // Ink
-$ink: #edf7ed;             // primary text (pale green-white)
-$ink-2: #bfcdbd;           // secondary text
-$ink-muted: #85937f;       // captions, axis labels
+$ink: #ecf3fc;             // primary text (pale blue-white)
+$ink-2: #bcc9d6;           // secondary text
+$ink-muted: #7f8ea1;       // captions, axis labels
 
 // Accent (brand, money, sequential hue for the map)
-$accent: #2fb457;
-$accent-rgb: 47, 180, 87;
-$accent-bright: #4ade80;   // hover / hero figure
-$accent-deep: #14532d;     // gradient foot for green surfaces / dark text on green
+$accent: #2e7cf6;
+$accent-rgb: 46, 124, 246;
+$accent-bright: #5ea3ff;   // hover / hero figure
+$accent-deep: #123a75;     // gradient foot for blue surfaces / dark text on blue
 
 // Categorical chart slots (fixed order — never cycled)
-$series-1: #2fb457;        // green
-$series-2: #3987e5;        // blue
+$series-1: #2e7cf6;        // blue
+$series-2: #1fb6a6;        // teal
 $series-3: #e8a33d;        // amber
-$series-4: #1fb6a6;        // teal
+$series-4: #e66767;        // coral
 
 // Sequential ramp for the choropleth: darkest = smallest market. Seven steps,
 // one hue, monotonic lightness. Countries with no data use $map-empty.
-$map-ramp: #0d2313, #143620, #1c4a2c, #256139, #2f7a47, #3a9757, #4ade80;
-$map-empty: rgba(233, 246, 236, 0.05);
-$map-stroke: rgba(233, 246, 236, 0.12);
+$map-ramp: #0d1f38, #14304f, #1b4268, #235582, #2c6ba3, #3b87c9, #5ea3ff;
+$map-empty: rgba(233, 242, 250, 0.05);
+$map-stroke: rgba(233, 242, 250, 0.12);
