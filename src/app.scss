@@ -69,7 +69,7 @@ body {
 }
 
 // Section eyebrow label used across panels. One accent, everywhere:
-// cherry red. Kickers in accent, headlines in cream, body in ink-2.
+// green. Kickers in accent, headlines in pale green-white, body in ink-2.
 .eyebrow {
   font-size: 0.65rem;
   font-weight: 600;
@@ -85,7 +85,7 @@ body {
   border-radius: 14px;
 }
 
-// Opt-in premium hover: gentle lift + red hairline. Only on content tiles
+// Opt-in premium hover: gentle lift + green hairline. Only on content tiles
 // (video cards, trend/idea tiles) — never on structural layout cards, so the
 // fixed h-dvh grid never shifts.
 .lift {
@@ -101,7 +101,7 @@ body {
   }
 }
 
-// Display headline treatment: cream melting into cherry red.
+// Display headline treatment: pale green-white melting into green.
 // One accent, everywhere — no multicolor excess.
 .red-text {
   background: linear-gradient(
@@ -115,7 +115,7 @@ body {
   color: transparent;
 }
 
-// Spotlight card: a soft red ambience behind hero content. The glow is
+// Spotlight card: a soft green ambience behind hero content. The glow is
 // inset and fades to transparent, so no overflow clipping is needed.
 .spotlight {
   position: relative;
