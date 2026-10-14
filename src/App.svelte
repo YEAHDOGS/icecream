@@ -1,23 +1,27 @@
 <script>
   import TabNav from "./components/TabNav.svelte";
   import MarketPanel from "./components/MarketPanel.svelte";
-  import PitchPanel from "./components/PitchPanel.svelte";
-  import JobPanel from "./components/JobPanel.svelte";
-  import ApplicantsPanel from "./components/ApplicantsPanel.svelte";
+  import SnakePanel from "./components/SnakePanel.svelte";
   import logo from "./assets/logo.svg";
   import dogsIcon from "./assets/brand/dogs.svg";
   import { SOURCE_COUNT } from "./data/index.js";
   import { BUILD_TAG } from "./data/imagery.js";
 
   const TABS = [
-    { id: "job", label: "The Job", short: "Job", component: JobPanel },
     { id: "market", label: "The Market", short: "Market", component: MarketPanel },
-    { id: "field", label: "The Field", short: "Field", component: ApplicantsPanel },
-    { id: "pitch", label: "The Pitch", short: "Pitch", component: PitchPanel },
+    { id: "snake", label: "Snake", short: "Snake", component: SnakePanel },
   ];
 
-  // Retired tab ids keep working as deep links after the 6 → 4 tab merge.
-  const TAB_ALIASES = { campaign: "job", flavors: "job", players: "market" };
+  // Retired tab ids keep working as deep links; everything retired now
+  // lands on the Market, the last tab standing (besides Snake).
+  const TAB_ALIASES = {
+    campaign: "market",
+    flavors: "market",
+    players: "market",
+    job: "market",
+    field: "market",
+    pitch: "market",
+  };
   const SWIPE_MIN_PX = 60;
   const TITLE = "The Scoop";
   const SUBTITLE = "Global ice cream market, fully cited";
